@@ -3,729 +3,792 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
 <title>BRANDO XITER</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
 }
 
-:root {
-    --blue: #168fe9;
-    --light-blue: #69c7ff;
-    --white: #ffffff;
-    --border: rgba(255,255,255,.13);
+:root{
+    --blue:#1677ff;
+    --blue2:#0b56c7;
+    --light:#69b7ff;
+    --white:#fff;
+    --dark:#05080d;
+    --dark2:#09111c;
+    --dark3:#0d1724;
+    --border:#1b2b3e;
+    --border-blue:#1d70d8;
+    --muted:#8795a6;
+    --danger:#ff4d5f;
 }
 
-html,
-body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    min-height: 100%;
-    font-family: Arial, Helvetica, sans-serif;
-    background:
-        linear-gradient(rgba(2,8,15,.55), rgba(2,8,15,.75)),
-        url("fundo.png") center / cover no-repeat fixed;
-    color: var(--white);
-    overflow-x: hidden;
+html,body{
+    width:100%;
+    min-height:100%;
+    background:#03070c;
+    color:white;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
-body {
-    min-height: 100vh;
+body{
+    min-height:100vh;
+    overflow-x:hidden;
 }
 
-button,
-input {
-    font: inherit;
+button,input{
+    font:inherit;
 }
 
-button {
-    cursor: pointer;
+button{
+    cursor:pointer;
 }
 
-.hidden {
-    display: none !important;
+.hidden{
+    display:none!important;
 }
 
-/* BACKGROUND */
+.screen{
+    position:relative;
+    min-height:100vh;
+    overflow:hidden;
+}
 
-.background {
-    position: fixed;
-    inset: 0;
-    z-index: -2;
+.screen::before{
+    content:"";
+    position:absolute;
+    inset:0;
     background:
         linear-gradient(
-            120deg,
-            rgba(0,0,0,.4),
-            rgba(0,65,120,.12)
+            180deg,
+            rgba(2,7,13,.82),
+            rgba(2,7,13,.94)
         ),
-        url("fundo.png") center / cover no-repeat;
-    transform: scale(1.03);
+        url("fundo.png") center/cover no-repeat;
+    z-index:0;
 }
 
-.background::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background:
-        linear-gradient(
-            90deg,
-            transparent 0%,
-            rgba(255,255,255,.035) 50%,
-            transparent 100%
-        );
-    animation: backgroundMove 8s linear infinite;
+.screen::after{
+    content:"";
+    position:absolute;
+    width:120%;
+    height:35%;
+    left:-10%;
+    bottom:-18%;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(22,119,255,.10),
+        transparent
+    );
+    transform:rotate(-8deg);
+    animation:bgMove 7s linear infinite;
+    pointer-events:none;
 }
 
-@keyframes backgroundMove {
-    0% {
-        transform: translateX(-100%);
-    }
-
-    100% {
-        transform: translateX(100%);
-    }
-}
-
-/* DECORATION */
-
-.particles {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: -1;
-    overflow: hidden;
-}
-
-.particle {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: rgba(255,255,255,.45);
-    border-radius: 50%;
-    animation: particleMove linear infinite;
-}
-
-.particle:nth-child(1) {
-    left: 10%;
-    top: 80%;
-    animation-duration: 8s;
-}
-
-.particle:nth-child(2) {
-    left: 22%;
-    top: 70%;
-    animation-duration: 11s;
-}
-
-.particle:nth-child(3) {
-    left: 38%;
-    top: 90%;
-    animation-duration: 9s;
-}
-
-.particle:nth-child(4) {
-    left: 55%;
-    top: 75%;
-    animation-duration: 12s;
-}
-
-.particle:nth-child(5) {
-    left: 70%;
-    top: 85%;
-    animation-duration: 10s;
-}
-
-.particle:nth-child(6) {
-    left: 84%;
-    top: 65%;
-    animation-duration: 13s;
-}
-
-.particle:nth-child(7) {
-    left: 92%;
-    top: 90%;
-    animation-duration: 9s;
-}
-
-@keyframes particleMove {
-    from {
-        transform: translateY(80px);
-        opacity: 0;
-    }
-
-    20% {
-        opacity: 1;
-    }
-
-    80% {
-        opacity: .7;
-    }
-
-    to {
-        transform: translateY(-900px);
-        opacity: 0;
-    }
-}
-
-/* SCREEN */
-
-.screen {
-    min-height: 100vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 25px;
+@keyframes bgMove{
+    0%{transform:translateX(-30%) rotate(-8deg)}
+    50%{transform:translateX(30%) rotate(-8deg)}
+    100%{transform:translateX(-30%) rotate(-8deg)}
 }
 
 /* LOGIN */
 
-.login-container {
-    width: 100%;
-    max-width: 430px;
-    animation: screenIn .7s ease;
+.login-container{
+    position:relative;
+    z-index:2;
+    width:min(440px,92%);
+    min-height:100vh;
+    margin:auto;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:30px 0;
 }
 
-@keyframes screenIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
+.logo-area{
+    text-align:center;
+    margin-bottom:30px;
+    animation:logoIn .7s ease both;
+}
+
+@keyframes logoIn{
+    from{
+        opacity:0;
+        transform:translateY(-18px);
     }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    to{
+        opacity:1;
+        transform:translateY(0);
     }
 }
 
-.logo-area {
-    text-align: center;
-    margin-bottom: 38px;
+.logo-symbol{
+    width:58px;
+    height:58px;
+    margin:0 auto 14px;
+    border:1px solid rgba(105,183,255,.65);
+    border-radius:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(255,255,255,.035);
 }
 
-.logo-icon {
-    width: 76px;
-    height: 76px;
-    margin: 0 auto 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(255,255,255,.3);
-    border-radius: 22px;
-    background: rgba(0,0,0,.22);
-    backdrop-filter: blur(10px);
+.logo-symbol svg{
+    width:32px;
+    height:32px;
+    fill:none;
+    stroke:white;
+    stroke-width:1.6;
+    stroke-linecap:round;
+    stroke-linejoin:round;
 }
 
-.logo-icon svg {
-    width: 43px;
-    height: 43px;
-    fill: none;
-    stroke: #ffffff;
-    stroke-width: 1.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+.logo{
+    font-size:35px;
+    font-weight:900;
+    letter-spacing:2px;
+    color:white;
 }
 
-.logo-text {
-    font-size: 39px;
-    font-weight: 900;
-    letter-spacing: 3px;
-    line-height: 1;
-    color: #ffffff;
+.logo span{
+    color:var(--light);
 }
 
-.logo-text span {
-    color: var(--light-blue);
+.logo-subtitle{
+    margin-top:7px;
+    font-size:10px;
+    letter-spacing:4px;
+    color:#8795a6;
 }
 
-.logo-subtitle {
-    margin-top: 11px;
-    color: rgba(255,255,255,.55);
-    font-size: 11px;
-    letter-spacing: 3px;
+.login-box{
+    width:100%;
+    padding:25px;
+    border:1px solid var(--border);
+    background:rgba(5,10,17,.90);
+    border-radius:18px;
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
+    animation:boxIn .7s .1s ease both;
 }
 
-/* LOGIN BOX */
-
-.login-box {
-    padding: 28px;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    background: rgba(3,9,16,.72);
-    backdrop-filter: blur(14px);
-    box-shadow:
-        0 20px 50px rgba(0,0,0,.4);
+@keyframes boxIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
-.input-label {
-    display: block;
-    margin-bottom: 9px;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: rgba(255,255,255,.58);
+.login-label{
+    display:block;
+    margin-bottom:9px;
+    color:#aab6c5;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:1.5px;
 }
 
-.input-row {
-    width: 100%;
-    display: flex;
-    gap: 8px;
+.key-input{
+    width:100%;
+    height:52px;
+    padding:0 15px;
+    border:1px solid #203348;
+    border-radius:10px;
+    outline:none;
+    color:white;
+    background:#080f18;
+    transition:.2s;
 }
 
-.key-input {
-    min-width: 0;
-    flex: 1;
-    height: 52px;
-    padding: 0 16px;
-    border: 1px solid rgba(255,255,255,.12);
-    border-radius: 11px;
-    outline: none;
-    background: rgba(255,255,255,.045);
-    color: #ffffff;
-    font-size: 14px;
-    letter-spacing: 1px;
-    transition: .2s;
+.key-input::placeholder{
+    color:#526274;
 }
 
-.key-input::placeholder {
-    color: rgba(255,255,255,.35);
+.key-input:focus{
+    border-color:var(--blue);
+    box-shadow:0 0 0 3px rgba(22,119,255,.10);
 }
 
-.key-input:focus {
-    border-color: rgba(105,199,255,.7);
-    background: rgba(255,255,255,.065);
+.login-button{
+    width:100%;
+    height:52px;
+    margin-top:12px;
+    border:0;
+    border-radius:10px;
+    background:linear-gradient(
+        135deg,
+        var(--blue),
+        var(--blue2)
+    );
+    color:white;
+    font-size:13px;
+    font-weight:800;
+    letter-spacing:1px;
+    transition:.2s;
 }
 
-.paste-button {
-    height: 52px;
-    padding: 0 15px;
-    border: 1px solid rgba(105,199,255,.35);
-    border-radius: 11px;
-    background: rgba(22,143,233,.12);
-    color: var(--light-blue);
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 1px;
-    transition: .2s;
+.login-button:active{
+    transform:scale(.98);
 }
 
-.paste-button:active {
-    transform: scale(.97);
+.login-button:hover{
+    filter:brightness(1.1);
 }
 
-.login-button {
-    width: 100%;
-    height: 54px;
-    margin-top: 13px;
-    border: 0;
-    border-radius: 11px;
-    background: #ffffff;
-    color: #07111b;
-    font-size: 12px;
-    font-weight: 900;
-    letter-spacing: 2px;
-    transition: .2s;
+.free-key{
+    margin-top:15px;
+    text-align:center;
+    color:#69788a;
+    font-size:11px;
+    line-height:1.6;
 }
 
-.login-button:active {
-    transform: scale(.98);
+.free-key strong{
+    color:var(--light);
 }
 
-.free-key {
-    margin-top: 18px;
-    text-align: center;
-    color: rgba(255,255,255,.45);
-    font-size: 10px;
-    line-height: 1.6;
-}
-
-.free-key strong {
-    color: var(--light-blue);
-    font-weight: 800;
-}
-
-.error {
-    min-height: 17px;
-    margin-top: 13px;
-    text-align: center;
-    color: #ff7777;
-    font-size: 11px;
+.error{
+    min-height:17px;
+    margin-top:11px;
+    text-align:center;
+    color:#ff6675;
+    font-size:11px;
 }
 
 /* MENU */
 
-.menu-container {
-    width: 100%;
-    max-width: 520px;
-    padding: 20px 0;
-    animation: screenIn .5s ease;
+.menu-container{
+    position:relative;
+    z-index:2;
+    width:min(900px,94%);
+    margin:auto;
+    padding:25px 0 35px;
 }
 
-.menu-header {
-    margin-bottom: 22px;
+.menu-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
 }
 
-.menu-logo {
-    font-size: 27px;
-    font-weight: 900;
-    letter-spacing: 2px;
+.menu-brand{
+    font-size:21px;
+    font-weight:900;
+    letter-spacing:1px;
 }
 
-.menu-logo span {
-    color: var(--light-blue);
+.menu-brand span{
+    color:var(--light);
 }
 
-.menu-description {
-    margin-top: 6px;
-    color: rgba(255,255,255,.45);
-    font-size: 10px;
-    letter-spacing: 1.5px;
+.menu-online{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    font-size:9px;
+    color:#91a0b1;
+    letter-spacing:1px;
 }
 
-.free-status {
-    margin-bottom: 18px;
-    padding: 16px 18px;
-    border: 1px solid rgba(105,199,255,.18);
-    border-radius: 15px;
-    background: rgba(0,45,80,.22);
-    text-align: center;
+.online-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#55d98b;
+    box-shadow:0 0 8px rgba(85,217,139,.45);
 }
 
-.free-status-title {
-    margin-bottom: 7px;
-    color: rgba(255,255,255,.5);
-    font-size: 9px;
-    font-weight: 800;
-    letter-spacing: 2px;
+.access-card{
+    padding:20px;
+    border:1px solid var(--border);
+    border-radius:15px;
+    background:rgba(7,14,23,.88);
+    margin-bottom:25px;
 }
 
-.timer {
-    color: var(--light-blue);
-    font-size: 25px;
-    font-weight: 900;
-    letter-spacing: 2px;
-    font-variant-numeric: tabular-nums;
+.access-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
 
-/* FEATURES */
-
-.features {
-    display: grid;
-    gap: 9px;
+.access-title{
+    font-size:10px;
+    color:#8492a3;
+    letter-spacing:1.5px;
+    font-weight:700;
 }
 
-.feature {
-    min-height: 62px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 13px 15px;
-    border: 1px solid rgba(255,255,255,.1);
-    border-radius: 14px;
-    background: rgba(0,0,0,.27);
-    backdrop-filter: blur(8px);
-    transition: .2s;
+.access-type{
+    font-size:10px;
+    color:var(--light);
+    border:1px solid rgba(105,183,255,.25);
+    padding:5px 9px;
+    border-radius:6px;
 }
 
-.feature:hover {
-    border-color: rgba(105,199,255,.32);
-    transform: translateX(3px);
+.timer{
+    margin-top:13px;
+    font-size:31px;
+    font-weight:800;
+    letter-spacing:3px;
+    color:white;
 }
 
-.feature-icon {
-    width: 38px;
-    height: 38px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(105,199,255,.2);
-    border-radius: 10px;
-    background: rgba(22,143,233,.08);
+.timer-label{
+    margin-top:4px;
+    color:#68788a;
+    font-size:9px;
+    letter-spacing:1.3px;
 }
 
-.feature-icon svg {
-    width: 20px;
-    height: 20px;
-    fill: none;
-    stroke: var(--light-blue);
-    stroke-width: 1.7;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+.section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:12px;
 }
 
-.feature-info {
-    flex: 1;
+.section-title{
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:1.4px;
 }
 
-.feature-name {
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: .7px;
+.section-count{
+    color:#718095;
+    font-size:10px;
 }
 
-.feature-state {
-    margin-top: 4px;
-    color: rgba(255,255,255,.38);
-    font-size: 9px;
-    letter-spacing: 1px;
+.features{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
 }
 
-.inject-button {
-    width: 100%;
-    height: 56px;
-    margin-top: 15px;
-    border: 1px solid rgba(105,199,255,.4);
-    border-radius: 13px;
-    background: rgba(22,143,233,.18);
-    color: #ffffff;
-    font-size: 12px;
-    font-weight: 900;
-    letter-spacing: 3px;
-    transition: .2s;
+.feature{
+    position:relative;
+    min-height:100px;
+    padding:17px;
+    border:1px solid var(--border);
+    border-radius:13px;
+    background:rgba(7,14,23,.88);
+    transition:.2s;
+    overflow:hidden;
 }
 
-.inject-button:active {
-    transform: scale(.98);
+.feature::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    bottom:0;
+    width:2px;
+    background:transparent;
+    transition:.2s;
+}
+
+.feature:active{
+    transform:scale(.985);
+}
+
+.feature.selected{
+    border-color:var(--border-blue);
+    background:rgba(12,35,62,.92);
+}
+
+.feature.selected::before{
+    background:var(--blue);
+}
+
+.feature-icon{
+    width:31px;
+    height:31px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid #25384e;
+    border-radius:8px;
+    margin-bottom:13px;
+    transition:.2s;
+}
+
+.feature.selected .feature-icon{
+    border-color:#287fdf;
+    background:rgba(22,119,255,.12);
+}
+
+.feature-icon svg{
+    width:17px;
+    height:17px;
+    fill:none;
+    stroke:#b8c4d1;
+    stroke-width:1.5;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.feature.selected .feature-icon svg{
+    stroke:var(--light);
+}
+
+.feature-name{
+    font-size:12px;
+    font-weight:800;
+    color:#e7edf5;
+}
+
+.feature-status{
+    margin-top:5px;
+    font-size:9px;
+    color:#68788a;
+    letter-spacing:.8px;
+}
+
+.feature.selected .feature-status{
+    color:var(--light);
+}
+
+.feature-bypass{
+    grid-column:1 / -1;
+    min-height:80px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.feature-bypass .feature-icon{
+    margin:0;
+    flex-shrink:0;
+}
+
+.feature-bypass .feature-info{
+    flex:1;
+}
+
+.feature-bypass .feature-status{
+    margin-top:4px;
+}
+
+.inject-area{
+    margin-top:16px;
+}
+
+.inject-button{
+    width:100%;
+    height:57px;
+    border:1px solid #277ce0;
+    border-radius:12px;
+    background:linear-gradient(
+        135deg,
+        #1475f5,
+        #0c55bd
+    );
+    color:white;
+    font-size:13px;
+    font-weight:900;
+    letter-spacing:1.5px;
+    transition:.2s;
+}
+
+.inject-button:hover{
+    filter:brightness(1.08);
+}
+
+.inject-button:active{
+    transform:scale(.985);
+}
+
+.menu-footer{
+    margin-top:22px;
+    text-align:center;
+    color:#3f4e60;
+    font-size:9px;
+    letter-spacing:1.5px;
 }
 
 /* MODAL */
 
-.modal {
-    position: fixed;
-    inset: 0;
-    z-index: 20;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background: rgba(0,0,0,.7);
-    backdrop-filter: blur(8px);
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:20;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:rgba(0,0,0,.72);
+    backdrop-filter:blur(7px);
 }
 
-.modal.show {
-    display: flex;
+.modal.show{
+    display:flex;
 }
 
-.modal-box {
-    width: 100%;
-    max-width: 400px;
-    padding: 27px;
-    border: 1px solid rgba(255,255,255,.13);
-    border-radius: 20px;
-    background: #071019;
-    box-shadow: 0 25px 70px rgba(0,0,0,.55);
-    animation: modalIn .25s ease;
+.modal-box{
+    width:min(510px,100%);
+    padding:24px;
+    border:1px solid #213348;
+    border-radius:17px;
+    background:#080f18;
+    box-shadow:0 25px 80px rgba(0,0,0,.65);
+    animation:modalIn .25s ease both;
 }
 
-@keyframes modalIn {
-    from {
-        opacity: 0;
-        transform: scale(.94) translateY(10px);
+@keyframes modalIn{
+    from{
+        opacity:0;
+        transform:translateY(12px) scale(.98);
     }
-
-    to {
-        opacity: 1;
-        transform: scale(1) translateY(0);
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
     }
 }
 
-.modal-title {
-    text-align: center;
-    font-size: 18px;
-    font-weight: 900;
-    letter-spacing: 1px;
+.modal-title{
+    font-size:18px;
+    font-weight:900;
+    letter-spacing:.7px;
+    text-align:center;
 }
 
-.modal-subtitle {
-    margin-top: 8px;
-    text-align: center;
-    color: rgba(255,255,255,.45);
-    font-size: 10px;
-    line-height: 1.6;
+.modal-subtitle{
+    margin-top:7px;
+    color:#738194;
+    font-size:11px;
+    line-height:1.6;
+    text-align:center;
 }
 
-/* GAME SELECT */
-
-.game-options {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-top: 22px;
+.game-options{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+    margin-top:22px;
 }
 
-.game-option {
-    position: relative;
-    overflow: hidden;
-    padding: 0;
-    border: 1px solid rgba(255,255,255,.12);
-    border-radius: 13px;
-    background: rgba(255,255,255,.04);
-    transition: .2s;
+.game-option{
+    overflow:hidden;
+    padding:0;
+    border:1px solid #203247;
+    border-radius:12px;
+    background:#0b131e;
+    color:white;
+    transition:.2s;
 }
 
-.game-option:active {
-    transform: scale(.97);
+.game-option:hover{
+    border-color:#287bd4;
+    transform:translateY(-2px);
 }
 
-.game-option img {
-    display: block;
-    width: 100%;
-    height: 135px;
-    object-fit: cover;
+.game-option img{
+    display:block;
+    width:100%;
+    height:135px;
+    object-fit:cover;
 }
 
-.game-option-name {
-    padding: 11px 8px;
-    text-align: center;
-    color: #ffffff;
-    font-size: 10px;
-    font-weight: 900;
-    letter-spacing: 1px;
+.game-option-name{
+    padding:12px 8px;
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:.8px;
 }
 
-/* PROCESS */
-
-.process-icon {
-    width: 54px;
-    height: 54px;
-    margin: 0 auto 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(105,199,255,.25);
-    border-radius: 50%;
+.close-button{
+    width:100%;
+    height:46px;
+    margin-top:13px;
+    border:1px solid #26384c;
+    border-radius:9px;
+    background:#0c1520;
+    color:#a9b5c3;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:1px;
 }
 
-.process-icon svg {
-    width: 25px;
-    height: 25px;
-    fill: none;
-    stroke: var(--light-blue);
-    stroke-width: 1.6;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+.close-button:active{
+    transform:scale(.98);
+}.process-icon{
+    width:60px;
+    height:60px;
+    margin:4px auto 18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid #21466d;
+    border-radius:50%;
+    background:#091827;
 }
 
-.loader {
-    width: 28px;
-    height: 28px;
-    border: 2px solid rgba(255,255,255,.12);
-    border-top-color: var(--light-blue);
-    border-radius: 50%;
-    animation: spin .8s linear infinite;
+.loader{
+    width:25px;
+    height:25px;
+    border:2px solid #20374e;
+    border-top-color:var(--light);
+    border-radius:50%;
+    animation:spin .8s linear infinite;
 }
 
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
     }
 }
 
-.process-message {
-    min-height: 18px;
-    margin-top: 18px;
-    text-align: center;
-    color: var(--light-blue);
-    font-size: 10px;
-    letter-spacing: 1px;
+.process-message{
+    margin-top:12px;
+    text-align:center;
+    color:#8d9bac;
+    font-size:11px;
+}
+
+.process-bar{
+    width:100%;
+    height:5px;
+    margin-top:22px;
+    overflow:hidden;
+    border-radius:5px;
+    background:#142131;
+}
+
+.process-progress{
+    width:0%;
+    height:100%;
+    border-radius:5px;
+    background:var(--blue);
+    transition:width .35s ease;
 }
 
 /* SUCCESS */
 
-.success-icon,
-.expired-icon {
-    width: 58px;
-    height: 58px;
-    margin: 0 auto 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(105,199,255,.3);
-    border-radius: 50%;
+.success-icon{
+    width:62px;
+    height:62px;
+    margin:0 auto 17px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid #2768a7;
+    border-radius:50%;
+    background:#091827;
 }
 
-.success-icon svg,
-.expired-icon svg {
-    width: 28px;
-    height: 28px;
-    fill: none;
-    stroke: var(--light-blue);
-    stroke-width: 1.7;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+.success-icon svg{
+    width:31px;
+    height:31px;
+    fill:none;
+    stroke:var(--light);
+    stroke-width:1.5;
+    stroke-linecap:round;
+    stroke-linejoin:round;
 }
 
-.close-button {
-    width: 100%;
-    height: 48px;
-    margin-top: 20px;
-    border: 1px solid rgba(255,255,255,.12);
-    border-radius: 10px;
-    background: rgba(255,255,255,.05);
-    color: #ffffff;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
+.success-details{
+    margin-top:12px;
+    padding:13px;
+    border:1px solid #1d2d40;
+    border-radius:9px;
+    background:#0b131d;
 }
 
-/* DISCORD */
-
-.discord-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    min-height: 50px;
-    margin-top: 22px;
-    border-radius: 11px;
-    background: #ffffff;
-    color: #071019;
-    text-decoration: none;
-    font-size: 10px;
-    font-weight: 900;
-    letter-spacing: 1.5px;
+.success-details-label{
+    color:#657589;
+    font-size:8px;
+    letter-spacing:1px;
+    font-weight:800;
 }
 
-.expired-box {
-    text-align: center;
+.success-details-value{
+    margin-top:5px;
+    color:#dbe5ef;
+    font-size:10px;
+    line-height:1.5;
 }
 
-/* RESPONSIVE */
+/* EXPIRED */
 
-@media (max-width: 420px) {
-    .screen {
-        padding: 16px;
-    }
-
-    .login-box {
-        padding: 22px;
-    }
-
-    .logo-text {
-        font-size: 32px;
-    }
-
-    .game-option img {
-        height: 115px;
-    }
+.expired-icon{
+    width:62px;
+    height:62px;
+    margin:0 auto 17px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid #6b3038;
+    border-radius:50%;
+    background:#1a0c10;
 }
 
-@media (max-height: 700px) {
-    .screen {
-        align-items: flex-start;
+.expired-icon svg{
+    width:30px;
+    height:30px;
+    fill:none;
+    stroke:#ff6675;
+    stroke-width:1.5;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.discord-button{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    height:47px;
+    margin-top:20px;
+    border:1px solid #3177c5;
+    border-radius:9px;
+    background:#0d4f96;
+    color:white;
+    text-decoration:none;
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:1px;
+}
+
+@media(max-width:600px){
+
+    .menu-container{
+        width:92%;
     }
 
-    .login-container {
-        margin-top: 20px;
+    .features{
+        grid-template-columns:1fr;
     }
 
-    .logo-area {
-        margin-bottom: 25px;
+    .feature-bypass{
+        grid-column:auto;
+    }
+
+    .game-options{
+        grid-template-columns:1fr;
+    }
+
+    .game-option img{
+        height:145px;
+    }
+
+    .logo{
+        font-size:31px;
+    }
+
+    .timer{
+        font-size:27px;
     }
 }
 </style>
@@ -733,34 +796,25 @@ button {
 
 <body>
 
-<div class="background"></div>
-
-<div class="particles">
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-</div>
-
-<!-- LOGIN -->
-
 <section id="loginScreen" class="screen">
 
     <div class="login-container">
 
         <div class="logo-area">
 
-            <div class="logo-icon">
+            <div class="logo-symbol">
+
                 <svg viewBox="0 0 24 24">
+
                     <path d="M12 3L4 7v5c0 5 3.5 8 8 9 4.5-1 8-4 8-9V7l-8-4z"/>
+
                     <path d="M9 12l2 2 4-4"/>
+
                 </svg>
+
             </div>
 
-            <div class="logo-text">
+            <div class="logo">
                 BRANDO <span>XITER</span>
             </div>
 
@@ -772,30 +826,21 @@ button {
 
         <div class="login-box">
 
-            <label class="input-label">
+            <label
+                class="login-label"
+                for="keyInput"
+            >
                 ACCESS KEY
             </label>
 
-            <div class="input-row">
-
-                <input
-                    id="keyInput"
-                    class="key-input"
-                    type="text"
-                    placeholder="Digite ou cole sua Key"
-                    autocomplete="off"
-                    spellcheck="false"
-                >
-
-                <button
-                    class="paste-button"
-                    type="button"
-                    onclick="pasteKey()"
-                >
-                    COLAR
-                </button>
-
-            </div>
+            <input
+                id="keyInput"
+                class="key-input"
+                type="text"
+                placeholder="Digite sua Key"
+                autocomplete="off"
+                spellcheck="false"
+            >
 
             <button
                 class="login-button"
@@ -811,7 +856,10 @@ button {
                 — acesso por 24 horas
             </div>
 
-            <div id="loginError" class="error"></div>
+            <div
+                id="loginError"
+                class="error"
+            ></div>
 
         </div>
 
@@ -819,167 +867,277 @@ button {
 
 </section>
 
-<!-- MENU -->
 
-<section id="menuScreen" class="screen hidden">
+<section
+    id="menuScreen"
+    class="screen hidden"
+>
 
     <div class="menu-container">
 
-        <div class="menu-header">
+        <div class="menu-top">
 
-            <div class="menu-logo">
+            <div class="menu-brand">
                 BRANDO <span>XITER</span>
             </div>
 
-            <div class="menu-description">
-                CONFIGURAÇÃO DE RECURSOS
+            <div class="menu-online">
+
+                <span class="online-dot"></span>
+
+                SYSTEM ONLINE
+
             </div>
 
         </div>
 
-        <div class="free-status">
 
-            <div class="free-status-title">
-                ACESSO BRN-FREE
+        <div class="access-card">
+
+            <div class="access-header">
+
+                <div class="access-title">
+                    ACCESS STATUS
+                </div>
+
+                <div class="access-type">
+                    BRN-FREE
+                </div>
+
             </div>
 
-            <div id="timer" class="timer">
+            <div
+                id="timer"
+                class="timer"
+            >
                 24:00:00
             </div>
 
+            <div class="timer-label">
+                TEMPO RESTANTE DO ACESSO
+            </div>
+
         </div>
+
+
+        <div class="section-head">
+
+            <div class="section-title">
+                RECURSOS DISPONÍVEIS
+            </div>
+
+            <div
+                id="selectedCount"
+                class="section-count"
+            >
+                0 SELECIONADOS
+            </div>
+
+        </div>
+
 
         <div class="features">
 
-            <div class="feature">
+            <div
+                class="feature"
+                data-feature="AUXÍLIO HS ALTO"
+                onclick="toggleFeature(this)"
+            >
 
                 <div class="feature-icon">
+
                     <svg viewBox="0 0 24 24">
-                        <path d="M12 3l8 4v5c0 4.5-3 7.5-8 9-5-1.5-8-4.5-8-9V7l8-4z"/>
+
+                        <path d="M12 19V5"/>
+
+                        <path d="M6 11l6-6 6 6"/>
+
+                    </svg>
+
+                </div>
+
+                <div class="feature-name">
+                    AUXÍLIO HS ALTO
+                </div>
+
+                <div class="feature-status">
+                    DESATIVADO
+                </div>
+
+            </div>
+
+
+            <div
+                class="feature"
+                data-feature="AUXÍLIO HS PESCOÇO"
+                onclick="toggleFeature(this)"
+            >
+
+                <div class="feature-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <circle
+                            cx="12"
+                            cy="8"
+                            r="3"
+                        />
+
+                        <path d="M6 20c.5-4 2.5-6 6-6s5.5 2 6 6"/>
+
+                    </svg>
+
+                </div>
+
+                <div class="feature-name">
+                    AUXÍLIO HS PESCOÇO
+                </div>
+
+                <div class="feature-status">
+                    DESATIVADO
+                </div>
+
+            </div>
+
+
+            <div
+                class="feature"
+                data-feature="OTIMIZADOR DE RAM"
+                onclick="toggleFeature(this)"
+            >
+
+                <div class="feature-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <rect
+                            x="4"
+                            y="6"
+                            width="16"
+                            height="12"
+                            rx="2"
+                        />
+
+                        <path d="M8 3v3M12 3v3M16 3v3"/>
+
+                        <path d="M8 18v3M12 18v3M16 18v3"/>
+
+                    </svg>
+
+                </div>
+
+                <div class="feature-name">
+                    OTIMIZADOR DE RAM
+                </div>
+
+                <div class="feature-status">
+                    DESATIVADO
+                </div>
+
+            </div>
+
+
+            <div
+                class="feature"
+                data-feature="ESTABILIZAR DE MIRA"
+                onclick="toggleFeature(this)"
+            >
+
+                <div class="feature-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <circle
+                            cx="12"
+                            cy="12"
+                            r="7"
+                        />
+
+                        <circle
+                            cx="12"
+                            cy="12"
+                            r="2"
+                        />
+
+                        <path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
+
+                    </svg>
+
+                </div>
+
+                <div class="feature-name">
+                    ESTABILIZAR DE MIRA
+                </div>
+
+                <div class="feature-status">
+                    DESATIVADO
+                </div>
+
+            </div>
+
+
+            <div
+                class="feature feature-bypass"
+                data-feature="BYPASS"
+                onclick="toggleFeature(this)"
+            >
+
+                <div class="feature-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M12 3l7 4v5c0 4.5-2.8 7.5-7 9-4.2-1.5-7-4.5-7-9V7l7-4z"/>
+
                         <path d="M9 12l2 2 4-4"/>
+
                     </svg>
+
                 </div>
 
                 <div class="feature-info">
-                    <div class="feature-name">
-                        AUXÍLIO HS ALTO
-                    </div>
 
-                    <div class="feature-state">
-                        DISPONÍVEL
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="feature">
-
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="8"/>
-                        <circle cx="12" cy="12" r="3"/>
-                        <path d="M12 4v3"/>
-                        <path d="M12 17v3"/>
-                        <path d="M4 12h3"/>
-                        <path d="M17 12h3"/>
-                    </svg>
-                </div>
-
-                <div class="feature-info">
-                    <div class="feature-name">
-                        AUXÍLIO HS PESCOÇO
-                    </div>
-
-                    <div class="feature-state">
-                        DISPONÍVEL
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="feature">
-
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M4 17h16"/>
-                        <path d="M6 17V9"/>
-                        <path d="M10 17V6"/>
-                        <path d="M14 17v-4"/>
-                        <path d="M18 17V4"/>
-                    </svg>
-                </div>
-
-                <div class="feature-info">
-                    <div class="feature-name">
-                        OTIMIZADOR DE RAM
-                    </div>
-
-                    <div class="feature-state">
-                        DISPONÍVEL
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="feature">
-
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="8"/>
-                        <path d="M12 8v4l3 2"/>
-                    </svg>
-                </div>
-
-                <div class="feature-info">
-                    <div class="feature-name">
-                        ESTABILIZAR DE MIRA
-                    </div>
-
-                    <div class="feature-state">
-                        PRECISION
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="feature">
-
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24">
-                        <rect x="5" y="10" width="14" height="10" rx="2"/>
-                        <path d="M8 10V7a4 4 0 018 0v3"/>
-                    </svg>
-                </div>
-
-                <div class="feature-info">
                     <div class="feature-name">
                         BYPASS
                     </div>
 
-                    <div class="feature-state">
-                        DISPONÍVEL
+                    <div class="feature-status">
+                        DESATIVADO
                     </div>
+
                 </div>
 
             </div>
 
         </div>
 
-        <button
-            class="inject-button"
-            type="button"
-            onclick="openGames()"
-        >
-            INJETAR
-        </button>
+
+        <div class="inject-area">
+
+            <button
+                id="injectButton"
+                class="inject-button"
+                type="button"
+                onclick="openGames()"
+            >
+                INJETAR
+            </button>
+
+        </div>
+
+
+        <div class="menu-footer">
+            BRANDO SYSTEM • SECURE ACCESS
+        </div>
 
     </div>
 
 </section>
 
-<!-- GAME MODAL -->
 
-<div id="gameModal" class="modal">
+<div
+    id="gameModal"
+    class="modal"
+>
 
     <div class="modal-box">
 
@@ -988,7 +1146,7 @@ button {
         </div>
 
         <div class="modal-subtitle">
-            Escolha a versão que deseja iniciar.
+            Escolha a versão que deseja utilizar no processo visual.
         </div>
 
         <div class="game-options">
@@ -998,23 +1156,34 @@ button {
                 type="button"
                 onclick="startProcess('FF MAX')"
             >
-                <img src="ffmax.png" alt="FF MAX">
+
+                <img
+                    src="ffmax.png"
+                    alt="FF MAX"
+                >
 
                 <div class="game-option-name">
-                    FF MAX
+                    FREE FIRE MAX
                 </div>
+
             </button>
+
 
             <button
                 class="game-option"
                 type="button"
                 onclick="startProcess('FF NORMAL')"
             >
-                <img src="ffnormal.png" alt="FF NORMAL">
+
+                <img
+                    src="ffnormal.png"
+                    alt="FF NORMAL"
+                >
 
                 <div class="game-option-name">
-                    FF NORMAL
+                    FREE FIRE NORMAL
                 </div>
+
             </button>
 
         </div>
@@ -1031,35 +1200,67 @@ button {
 
 </div>
 
-<!-- PROCESS MODAL -->
 
-<div id="processModal" class="modal">
+<div
+    id="processModal"
+    class="modal"
+>
 
     <div class="modal-box">
 
         <div class="process-icon">
+
             <div class="loader"></div>
+
         </div>
 
-        <div id="processTitle" class="modal-title">
-            PROCESSANDO
+        <div
+            id="processTitle"
+            class="modal-title"
+        >
+            INJETANDO
         </div>
 
-        <div id="processMessage" class="process-message">
+        <div
+            id="processMessage"
+            class="process-message"
+        >
             Preparando processo...
         </div>
 
-                        <!-- SUCCESS MODAL -->
+        <div class="process-bar">
 
-<div id="successModal" class="modal">
+            <div
+                id="processProgress"
+                class="process-progress"
+            ></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div
+    id="successModal"
+    class="modal"
+>
 
     <div class="modal-box">
 
         <div class="success-icon">
 
             <svg viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="9"/>
-                <path d="M8 12l2.5 2.5L16 9"/>
+
+                <circle
+                    cx="12"
+                    cy="12"
+                    r="9"
+                />
+
+                <path d="M7.5 12.5l3 3L17 9"/>
+
             </svg>
 
         </div>
@@ -1068,8 +1269,41 @@ button {
             PROCESSO CONCLUÍDO
         </div>
 
-        <div id="successMessage" class="modal-subtitle">
-            Arquivos processados com sucesso.
+        <div
+            id="successMessage"
+            class="modal-subtitle"
+        >
+            Configurações processadas com sucesso.
+        </div>
+
+        <div class="success-details">
+
+            <div class="success-details-label">
+                JOGO SELECIONADO
+            </div>
+
+            <div
+                id="successGame"
+                class="success-details-value"
+            >
+                FF MAX
+            </div>
+
+        </div>
+
+        <div class="success-details">
+
+            <div class="success-details-label">
+                RECURSOS SELECIONADOS
+            </div>
+
+            <div
+                id="successFeatures"
+                class="success-details-value"
+            >
+                NENHUM
+            </div>
+
         </div>
 
         <button
@@ -1084,18 +1318,28 @@ button {
 
 </div>
 
-<!-- EXPIRED MODAL -->
 
-<div id="expiredModal" class="modal">
+<div
+    id="expiredModal"
+    class="modal"
+>
 
     <div class="modal-box expired-box">
 
         <div class="expired-icon">
 
             <svg viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="9"/>
+
+                <circle
+                    cx="12"
+                    cy="12"
+                    r="9"
+                />
+
                 <path d="M12 7v5"/>
+
                 <path d="M12 16h.01"/>
+
             </svg>
 
         </div>
@@ -1105,9 +1349,16 @@ button {
         </div>
 
         <div class="modal-subtitle">
+
             O período gratuito de 24 horas terminou.
+
+            <br><br>
+
             Para continuar utilizando o acesso,
-            adquira o AUXÍLIO VIP no nosso Discord.
+            adquira o
+            <strong>AUXÍLIO VIP</strong>
+            no nosso Discord.
+
         </div>
 
         <a
@@ -1131,93 +1382,99 @@ button {
 
 </div>
 
+
 <script>
 
 const FREE_KEY = "BRN-FREE";
 
-const FREE_DURATION = 24 * 60 * 60 * 1000;
+const FREE_DURATION =
+    24 * 60 * 60 * 1000;
 
-const FREE_STORAGE = "brando_free_key_start";
+const FREE_STORAGE =
+    "brando_free_key_start";
 
 let timerInterval = null;
 
+let selectedGame = "";
 
-/* =========================
-   COLAR KEY
-========================= */
+let selectedFeatures = [];
 
-async function pasteKey() {
+const loginScreen =
+    document.getElementById("loginScreen");
 
-    const input = document.getElementById("keyInput");
+const menuScreen =
+    document.getElementById("menuScreen");
 
-    const error = document.getElementById("loginError");
+const keyInput =
+    document.getElementById("keyInput");
 
-    try {
+const loginError =
+    document.getElementById("loginError");
 
-        if (
-            navigator.clipboard &&
-            navigator.clipboard.readText
-        ) {
+const timer =
+    document.getElementById("timer");
 
-            const text =
-                await navigator.clipboard.readText();
+const selectedCount =
+    document.getElementById("selectedCount");
 
-            input.value = text.trim();
+const injectButton =
+    document.getElementById("injectButton");
 
-            error.textContent = "";
+const gameModal =
+    document.getElementById("gameModal");
 
-            input.focus();
+const processModal =
+    document.getElementById("processModal");
 
-            return;
-        }
+const successModal =
+    document.getElementById("successModal");
 
-        error.textContent =
-            "A função de colar não está disponível.";
+const expiredModal =
+    document.getElementById("expiredModal");
 
-    } catch (e) {
+const processTitle =
+    document.getElementById("processTitle");
 
-        error.textContent =
-            "Não foi possível acessar a área de transferência.";
+const processMessage =
+    document.getElementById("processMessage");
 
-    }
+const processProgress =
+    document.getElementById("processProgress");
 
-}
+const successMessage =
+    document.getElementById("successMessage");
+
+const successGame =
+    document.getElementById("successGame");
+
+const successFeatures =
+    document.getElementById("successFeatures");
 
 
-/* =========================
-   LOGIN
-========================= */
-
-function login() {
-
-    const input =
-        document.getElementById("keyInput");
-
-    const error =
-        document.getElementById("loginError");
+function login(){
 
     const key =
-        input.value.trim().toUpperCase();
+        keyInput.value
+        .trim()
+        .toUpperCase();
 
+    loginError.textContent = "";
 
-    if (!key) {
+    if(!key){
 
-        error.textContent =
-            "Digite ou cole uma Key.";
+        loginError.textContent =
+            "Digite sua Key.";
 
         return;
-
     }
 
+    if(key === FREE_KEY){
 
-    if (key === FREE_KEY) {
-
-        if (isFreeExpired()) {
+        if(isFreeExpired()){
 
             showExpired();
 
             return;
-
         }
 
         startFreeTimer();
@@ -1225,104 +1482,283 @@ function login() {
         enterMenu();
 
         return;
-
     }
 
+    if(!key.startsWith("BRN-")){
 
-    if (!key.startsWith("BRN-")) {
-
-        error.textContent =
+        loginError.textContent =
             "Key não encontrada. Tente novamente.";
 
-        input.focus();
-
         return;
-
     }
 
-
-    error.textContent =
+    loginError.textContent =
         "Key não encontrada. Tente novamente.";
-
-    input.focus();
-
 }
 
 
-/* =========================
-   ENTRAR NO MENU
-========================= */
+function enterMenu(){
 
-function enterMenu() {
+    loginScreen.classList.add("hidden");
 
-    document
-        .getElementById("loginScreen")
-        .classList.add("hidden");
+    menuScreen.classList.remove("hidden");
 
-
-    document
-        .getElementById("menuScreen")
-        .classList.remove("hidden");
-
+    updateTimer();
 }
 
 
-/* =========================
-   TIMER
-========================= */
+function toggleFeature(element){
 
-function startFreeTimer() {
+    if(isFreeExpired()){
+
+        lockFreeAccess();
+
+        return;
+    }
+
+    const feature =
+        element.dataset.feature;
+
+    element.classList.toggle("selected");
+
+    const status =
+        element.querySelector(".feature-status");
+
+    if(element.classList.contains("selected")){
+
+        if(!selectedFeatures.includes(feature)){
+
+            selectedFeatures.push(feature);
+
+        }
+
+        status.textContent =
+            "ATIVADO";
+
+    }else{
+
+        selectedFeatures =
+            selectedFeatures.filter(
+                item => item !== feature
+            );
+
+        status.textContent =
+            "DESATIVADO";
+    }
+
+    updateSelectedCount();
+}
+
+
+function updateSelectedCount(){
+
+    const total =
+        selectedFeatures.length;
+
+    if(total === 1){
+
+        selectedCount.textContent =
+            "1 SELECIONADO";
+
+    }else{
+
+        selectedCount.textContent =
+            total + " SELECIONADOS";
+    }
+    }function openGames(){
+
+    if(isFreeExpired()){
+
+        lockFreeAccess();
+
+        return;
+    }
+
+    if(selectedFeatures.length === 0){
+
+        const oldText =
+            injectButton.textContent;
+
+        injectButton.textContent =
+            "SELECIONE PELO MENOS 1 RECURSO";
+
+        injectButton.style.borderColor =
+            "#ff5365";
+
+        setTimeout(() => {
+
+            injectButton.textContent =
+                oldText;
+
+            injectButton.style.borderColor =
+                "";
+
+        },1800);
+
+        return;
+    }
+
+    gameModal.classList.add("show");
+}
+
+
+function closeGames(){
+
+    gameModal.classList.remove("show");
+}
+
+
+function startProcess(game){
+
+    if(isFreeExpired()){
+
+        lockFreeAccess();
+
+        return;
+    }
+
+    selectedGame = game;
+
+    closeGames();
+
+    processModal.classList.add("show");
+
+    processTitle.textContent =
+        "INJETANDO";
+
+    processMessage.textContent =
+        "Preparando processo...";
+
+    processProgress.style.width =
+        "0%";
+
+
+    const stages = [
+
+        {
+            time:500,
+            progress:"15%",
+            message:
+                "Preparando " + game + "..."
+        },
+
+        {
+            time:1100,
+            progress:"35%",
+            message:
+                "Inicializando recursos..."
+        },
+
+        {
+            time:1800,
+            progress:"55%",
+            message:
+                "Verificando configurações..."
+        },
+
+        {
+            time:2600,
+            progress:"75%",
+            message:
+                "Aplicando configurações..."
+        },
+
+        {
+            time:3400,
+            progress:"92%",
+            message:
+                "Finalizando processo..."
+        },
+
+        {
+            time:4000,
+            progress:"100%",
+            message:
+                "Processo concluído."
+        }
+
+    ];
+
+
+    stages.forEach(stage => {
+
+        setTimeout(() => {
+
+            processProgress.style.width =
+                stage.progress;
+
+            processMessage.textContent =
+                stage.message;
+
+        },stage.time);
+
+    });
+
+
+    setTimeout(() => {
+
+        processModal.classList.remove("show");
+
+        showSuccess();
+
+    },4200);
+}
+
+
+function showSuccess(){
+
+    successMessage.textContent =
+        "Configurações processadas com sucesso.";
+
+    successGame.textContent =
+        selectedGame;
+
+    successFeatures.textContent =
+        selectedFeatures.join(" • ");
+
+    successModal.classList.add("show");
+}
+
+
+function closeSuccess(){
+
+    successModal.classList.remove("show");
+}
+
+
+function startFreeTimer(){
 
     let start =
-        Number(
-            localStorage.getItem(
-                FREE_STORAGE
-            )
+        localStorage.getItem(
+            FREE_STORAGE
         );
 
 
-    if (
-        !start ||
-        !Number.isFinite(start)
-    ) {
+    if(!start){
 
-        start = Date.now();
+        start =
+            Date.now().toString();
 
         localStorage.setItem(
             FREE_STORAGE,
-            String(start)
+            start
         );
-
     }
 
 
     updateTimer();
 
-
     clearInterval(timerInterval);
-
 
     timerInterval =
         setInterval(
             updateTimer,
             1000
         );
-
 }
 
 
-/* =========================
-   ATUALIZAR TIMER
-========================= */
-
-function updateTimer() {
-
-    const timer =
-        document.getElementById("timer");
-
-
-    if (!timer) return;
-
+function updateTimer(){
 
     const start =
         Number(
@@ -1332,17 +1768,24 @@ function updateTimer() {
         );
 
 
-    if (!start) return;
+    if(!start){
+
+        timer.textContent =
+            "24:00:00";
+
+        return;
+    }
+
+
+    const elapsed =
+        Date.now() - start;
 
 
     const remaining =
-        FREE_DURATION -
-        (Date.now() - start);
+        FREE_DURATION - elapsed;
 
 
-    if (remaining <= 0) {
-
-        clearInterval(timerInterval);
+    if(remaining <= 0){
 
         timer.textContent =
             "00:00:00";
@@ -1350,7 +1793,6 @@ function updateTimer() {
         lockFreeAccess();
 
         return;
-
     }
 
 
@@ -1377,20 +1819,15 @@ function updateTimer() {
 
 
     timer.textContent =
-        String(hours).padStart(2, "0") +
-        ":" +
-        String(minutes).padStart(2, "0") +
-        ":" +
-        String(seconds).padStart(2, "0");
-
+        String(hours).padStart(2,"0")
+        + ":"
+        + String(minutes).padStart(2,"0")
+        + ":"
+        + String(seconds).padStart(2,"0");
 }
 
 
-/* =========================
-   VERIFICAR EXPIRAÇÃO
-========================= */
-
-function isFreeExpired() {
+function isFreeExpired(){
 
     const start =
         Number(
@@ -1400,232 +1837,139 @@ function isFreeExpired() {
         );
 
 
-    if (!start) {
+    if(!start){
 
         return false;
-
     }
 
 
     return (
-        Date.now() - start >=
-        FREE_DURATION
+        Date.now() - start
+        >= FREE_DURATION
     );
-
 }
 
 
-/* =========================
-   BLOQUEAR ACESSO
-========================= */
+function lockFreeAccess(){
 
-function lockFreeAccess() {
+    clearInterval(timerInterval);
 
-    document
-        .getElementById("menuScreen")
-        .classList.add("hidden");
+    timerInterval = null;
 
+    menuScreen.classList.add("hidden");
 
     showExpired();
-
 }
 
 
-/* =========================
-   MODAL EXPIRADO
-========================= */
+function showExpired(){
 
-function showExpired() {
-
-    document
-        .getElementById("expiredModal")
-        .classList.add("show");
-
+    expiredModal.classList.add("show");
 }
 
 
-function closeExpired() {
+function closeExpired(){
 
-    document
-        .getElementById("expiredModal")
-        .classList.remove("show");
+    expiredModal.classList.remove("show");
 
+    keyInput.value = "";
+
+    loginError.textContent = "";
+
+    loginScreen.classList.remove("hidden");
 }
 
 
-/* =========================
-   GAME SELECT
-========================= */
+keyInput.addEventListener(
+    "keydown",
+    function(event){
 
-function openGames() {
+        if(event.key === "Enter"){
 
-    if (isFreeExpired()) {
+            login();
 
-        lockFreeAccess();
-
-        return;
+        }
 
     }
+);
 
 
-    document
-        .getElementById("gameModal")
-        .classList.add("show");
+gameModal.addEventListener(
+    "click",
+    function(event){
 
-}
+        if(event.target === gameModal){
 
+            closeGames();
 
-function closeGames() {
+        }
 
-    document
-        .getElementById("gameModal")
-        .classList.remove("show");
-
-}
+    }
+);
 
 
-/* =========================
-   PROCESSO
-========================= */
+successModal.addEventListener(
+    "click",
+    function(event){
 
-function startProcess(game) {
+        if(event.target === successModal){
 
-    closeGames();
+            closeSuccess();
 
+        }
 
-    const processModal =
-        document.getElementById(
-            "processModal"
-        );
-
-
-    const processTitle =
-        document.getElementById(
-            "processTitle"
-        );
+    }
+);
 
 
-    const processMessage =
-        document.getElementById(
-            "processMessage"
-        );
+window.addEventListener(
+    "load",
+    function(){
+
+        const start =
+            localStorage.getItem(
+                FREE_STORAGE
+            );
 
 
-    processTitle.textContent =
-        "INJETANDO";
+        if(start){
 
+            if(isFreeExpired()){
 
-    processMessage.textContent =
-        "Preparando " + game + "...";
+                localStorage.removeItem(
+                    FREE_STORAGE
+                );
 
+            }else{
 
-    processModal.classList.add("show");
-
-
-    setTimeout(() => {
-
-        processMessage.textContent =
-            "Verificando configurações...";
-
-    }, 1100);
-
-
-    setTimeout(() => {
-
-        processMessage.textContent =
-            "Aplicando configurações...";
-
-    }, 2200);
-
-
-    setTimeout(() => {
-
-        processMessage.textContent =
-            "Finalizando processo...";
-
-    }, 3300);
-
-
-    setTimeout(() => {
-
-        processModal.classList.remove("show");
-
-
-        document
-            .getElementById(
-                "successMessage"
-            )
-            .textContent =
-            game +
-            " selecionado. Processo concluído.";
-
-
-        document
-            .getElementById(
-                "successModal"
-            )
-            .classList.add("show");
-
-
-    }, 4400);
-
-}
-
-
-/* =========================
-   SUCCESS
-========================= */
-
-function closeSuccess() {
-
-    document
-        .getElementById(
-            "successModal"
-        )
-        .classList.remove("show");
-
-}
-
-
-/* =========================
-   ENTER NO INPUT
-========================= */
-
-document
-    .getElementById("keyInput")
-    .addEventListener(
-        "keydown",
-        function(event) {
-
-            if (
-                event.key === "Enter"
-            ) {
-
-                login();
+                startFreeTimer();
 
             }
 
         }
-    );
+
+    }
+);
 
 
-/* =========================
-   CONTINUAR TIMER
-   APÓS RECARREGAR
-========================= */
+setInterval(
+    function(){
 
-if (
-    localStorage.getItem(
-        FREE_STORAGE
-    ) &&
-    !isFreeExpired()
-) {
+        if(
+            !menuScreen.classList.contains("hidden")
+            &&
+            isFreeExpired()
+        ){
 
-    startFreeTimer();
+            lockFreeAccess();
 
-}
+        }
+
+    },
+    5000
+);
 
 </script>
 
 </body>
-    </html>
+</html>
