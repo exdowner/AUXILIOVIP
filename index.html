@@ -3,13 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
 <title>BRANDO XITER</title>
 
 <style>
+
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
     -webkit-tap-highlight-color:transparent;
 }
 
@@ -27,35 +29,34 @@
     --danger:#ff4d5f;
 }
 
-html,body{
+html,
+body{
     width:100%;
     min-height:100%;
-    background:#03070c;
-    color:white;
+    background:#05080d;
+    color:#fff;
     font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-    min-height:100vh;
     overflow-x:hidden;
 }
 
-button,input{
-    font:inherit;
-}
-
-button{
-    cursor:pointer;
+button,
+input{
+    font-family:inherit;
 }
 
 .hidden{
-    display:none!important;
+    display:none !important;
 }
 
 .screen{
     position:relative;
+    width:100%;
     min-height:100vh;
     overflow:hidden;
+    background:#05080d;
 }
 
 .screen::before{
@@ -75,86 +76,64 @@ button{
 .screen::after{
     content:"";
     position:absolute;
-    width:120%;
-    height:35%;
-    left:-10%;
-    bottom:-18%;
-    background:linear-gradient(
-        90deg,
-        transparent,
-        rgba(22,119,255,.10),
-        transparent
-    );
-    transform:rotate(-8deg);
-    animation:bgMove 7s linear infinite;
+    width:420px;
+    height:420px;
+    left:-180px;
+    top:-180px;
+    border-radius:50%;
+    background:rgba(22,119,255,.10);
+    filter:blur(70px);
     pointer-events:none;
+    z-index:0;
 }
 
-@keyframes bgMove{
-    0%{transform:translateX(-30%) rotate(-8deg)}
-    50%{transform:translateX(30%) rotate(-8deg)}
-    100%{transform:translateX(-30%) rotate(-8deg)}
-}
-
-/* LOGIN */
-
-.login-container{
+.login-container,
+.menu-container{
     position:relative;
     z-index:2;
-    width:min(440px,92%);
+}
+
+.login-container{
+    width:100%;
     min-height:100vh;
-    margin:auto;
     display:flex;
     flex-direction:column;
-    justify-content:center;
     align-items:center;
-    padding:30px 0;
+    justify-content:center;
+    padding:24px;
 }
 
 .logo-area{
-    text-align:center;
-    margin-bottom:30px;
-    animation:logoIn .7s ease both;
-}
-
-@keyframes logoIn{
-    from{
-        opacity:0;
-        transform:translateY(-18px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    margin-bottom:32px;
 }
 
 .logo-symbol{
     width:58px;
     height:58px;
-    margin:0 auto 14px;
-    border:1px solid rgba(105,183,255,.65);
-    border-radius:16px;
     display:flex;
     align-items:center;
     justify-content:center;
-    background:rgba(255,255,255,.035);
+    margin-bottom:16px;
 }
 
 .logo-symbol svg{
-    width:32px;
-    height:32px;
+    width:48px;
+    height:48px;
     fill:none;
-    stroke:white;
-    stroke-width:1.6;
+    stroke:#fff;
+    stroke-width:1.5;
     stroke-linecap:round;
     stroke-linejoin:round;
 }
 
 .logo{
-    font-size:35px;
+    font-size:31px;
     font-weight:900;
     letter-spacing:2px;
-    color:white;
+    color:#fff;
 }
 
 .logo span{
@@ -163,55 +142,46 @@ button{
 
 .logo-subtitle{
     margin-top:7px;
+    color:#718196;
     font-size:10px;
+    font-weight:700;
     letter-spacing:4px;
-    color:#8795a6;
 }
 
 .login-box{
     width:100%;
+    max-width:410px;
     padding:25px;
+    background:rgba(6,13,22,.91);
     border:1px solid var(--border);
-    background:rgba(5,10,17,.90);
-    border-radius:18px;
-    box-shadow:0 20px 60px rgba(0,0,0,.45);
-    animation:boxIn .7s .1s ease both;
-}
-
-@keyframes boxIn{
-    from{
-        opacity:0;
-        transform:translateY(20px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+    border-radius:17px;
+    box-shadow:0 20px 60px rgba(0,0,0,.42);
 }
 
 .login-label{
     display:block;
     margin-bottom:9px;
-    color:#aab6c5;
-    font-size:11px;
-    font-weight:700;
+    color:#b6c4d3;
+    font-size:10px;
+    font-weight:800;
     letter-spacing:1.5px;
 }
 
 .key-input{
     width:100%;
     height:52px;
-    padding:0 15px;
-    border:1px solid #203348;
+    padding:0 16px;
     border-radius:10px;
+    border:1px solid #22364d;
     outline:none;
-    color:white;
     background:#080f18;
+    color:#fff;
+    font-size:14px;
     transition:.2s;
 }
 
 .key-input::placeholder{
-    color:#526274;
+    color:#566678;
 }
 
 .key-input:focus{
@@ -222,70 +192,62 @@ button{
 .login-button{
     width:100%;
     height:52px;
-    margin-top:12px;
-    border:0;
+    margin-top:13px;
+    border:1px solid #3189ff;
     border-radius:10px;
-    background:linear-gradient(
-        135deg,
-        var(--blue),
-        var(--blue2)
-    );
-    color:white;
+    background:var(--blue);
+    color:#fff;
     font-size:13px;
-    font-weight:800;
+    font-weight:900;
     letter-spacing:1px;
+    cursor:pointer;
     transition:.2s;
 }
 
 .login-button:active{
-    transform:scale(.98);
-}
-
-.login-button:hover{
-    filter:brightness(1.1);
+    transform:scale(.985);
 }
 
 .free-key{
     margin-top:15px;
     text-align:center;
-    color:#69788a;
+    color:#68798b;
     font-size:11px;
-    line-height:1.6;
+    line-height:1.5;
 }
 
 .free-key strong{
-    color:var(--light);
+    color:#69b7ff;
 }
 
 .error{
     min-height:17px;
     margin-top:11px;
     text-align:center;
-    color:#ff6675;
+    color:var(--danger);
     font-size:11px;
+    font-weight:700;
 }
 
-/* MENU */
-
 .menu-container{
-    position:relative;
-    z-index:2;
-    width:min(900px,94%);
+    width:100%;
+    max-width:720px;
+    min-height:100vh;
     margin:auto;
-    padding:25px 0 35px;
+    padding:28px 20px 25px;
 }
 
 .menu-top{
     display:flex;
-    justify-content:space-between;
     align-items:center;
+    justify-content:space-between;
     margin-bottom:20px;
 }
 
 .menu-brand{
     font-size:21px;
     font-weight:900;
-    letter-spacing:1px;
+    letter-spacing:1.4px;
 }
 
 .menu-brand span{
@@ -296,8 +258,9 @@ button{
     display:flex;
     align-items:center;
     gap:7px;
+    color:#8c9aaa;
     font-size:9px;
-    color:#91a0b1;
+    font-weight:800;
     letter-spacing:1px;
 }
 
@@ -306,15 +269,15 @@ button{
     height:7px;
     border-radius:50%;
     background:#55d98b;
-    box-shadow:0 0 8px rgba(85,217,139,.45);
+    box-shadow:0 0 9px rgba(85,217,139,.5);
 }
 
 .access-card{
-    padding:20px;
+    padding:21px;
+    margin-bottom:24px;
     border:1px solid var(--border);
     border-radius:15px;
-    background:rgba(7,14,23,.88);
-    margin-bottom:25px;
+    background:rgba(6,13,22,.91);
 }
 
 .access-header{
@@ -324,51 +287,53 @@ button{
 }
 
 .access-title{
+    color:#8c9aaa;
     font-size:10px;
-    color:#8492a3;
+    font-weight:800;
     letter-spacing:1.5px;
-    font-weight:700;
 }
 
 .access-type{
+    color:#69b7ff;
     font-size:10px;
-    color:var(--light);
-    border:1px solid rgba(105,183,255,.25);
-    padding:5px 9px;
-    border-radius:6px;
+    font-weight:900;
+    letter-spacing:1px;
 }
 
 .timer{
-    margin-top:13px;
+    margin-top:11px;
+    color:#fff;
     font-size:31px;
-    font-weight:800;
+    font-weight:900;
     letter-spacing:3px;
-    color:white;
 }
 
 .timer-label{
-    margin-top:4px;
-    color:#68788a;
+    margin-top:5px;
+    color:#657486;
     font-size:9px;
-    letter-spacing:1.3px;
+    font-weight:700;
+    letter-spacing:1.2px;
 }
 
 .section-head{
     display:flex;
-    justify-content:space-between;
     align-items:center;
+    justify-content:space-between;
     margin-bottom:12px;
 }
 
 .section-title{
+    color:#d9e1ea;
     font-size:11px;
-    font-weight:800;
-    letter-spacing:1.4px;
+    font-weight:900;
+    letter-spacing:1.2px;
 }
 
 .section-count{
-    color:#718095;
-    font-size:10px;
+    color:#6e8196;
+    font-size:9px;
+    font-weight:800;
 }
 
 .features{
@@ -379,23 +344,12 @@ button{
 
 .feature{
     position:relative;
-    min-height:100px;
-    padding:17px;
+    min-height:102px;
+    padding:16px;
     border:1px solid var(--border);
     border-radius:13px;
-    background:rgba(7,14,23,.88);
-    transition:.2s;
-    overflow:hidden;
-}
-
-.feature::before{
-    content:"";
-    position:absolute;
-    left:0;
-    top:0;
-    bottom:0;
-    width:2px;
-    background:transparent;
+    background:rgba(7,15,25,.92);
+    cursor:pointer;
     transition:.2s;
 }
 
@@ -404,242 +358,220 @@ button{
 }
 
 .feature.selected{
-    border-color:var(--border-blue);
-    background:rgba(12,35,62,.92);
+    border-color:#1d70d8;
+    background:rgba(11,39,72,.55);
 }
 
-.feature.selected::before{
-    background:var(--blue);
+.feature-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
 
 .feature-icon{
-    width:31px;
-    height:31px;
+    width:33px;
+    height:33px;
     display:flex;
     align-items:center;
     justify-content:center;
-    border:1px solid #25384e;
     border-radius:8px;
-    margin-bottom:13px;
-    transition:.2s;
+    border:1px solid #24374d;
+    background:#0b1420;
 }
 
 .feature.selected .feature-icon{
-    border-color:#287fdf;
-    background:rgba(22,119,255,.12);
+    border-color:#2a83eb;
+    background:#0c315a;
 }
 
 .feature-icon svg{
-    width:17px;
-    height:17px;
+    width:19px;
+    height:19px;
     fill:none;
-    stroke:#b8c4d1;
+    stroke:#aebccc;
     stroke-width:1.5;
     stroke-linecap:round;
     stroke-linejoin:round;
 }
 
 .feature.selected .feature-icon svg{
-    stroke:var(--light);
-}
-
-.feature-name{
-    font-size:12px;
-    font-weight:800;
-    color:#e7edf5;
+    stroke:#69b7ff;
 }
 
 .feature-status{
-    margin-top:5px;
-    font-size:9px;
-    color:#68788a;
-    letter-spacing:.8px;
+    color:#68798b;
+    font-size:8px;
+    font-weight:900;
+    letter-spacing:.7px;
 }
 
 .feature.selected .feature-status{
-    color:var(--light);
+    color:#69b7ff;
+}
+
+.feature-name{
+    margin-top:13px;
+    color:#e6edf4;
+    font-size:11px;
+    font-weight:900;
+    letter-spacing:.4px;
+}
+
+.feature-sub{
+    margin-top:4px;
+    color:#657486;
+    font-size:8px;
+    font-weight:700;
 }
 
 .feature-bypass{
     grid-column:1 / -1;
-    min-height:80px;
-    display:flex;
-    align-items:center;
-    gap:14px;
-}
-
-.feature-bypass .feature-icon{
-    margin:0;
-    flex-shrink:0;
-}
-
-.feature-bypass .feature-info{
-    flex:1;
-}
-
-.feature-bypass .feature-status{
-    margin-top:4px;
 }
 
 .inject-area{
-    margin-top:16px;
+    margin-top:18px;
 }
 
 .inject-button{
     width:100%;
-    height:57px;
-    border:1px solid #277ce0;
-    border-radius:12px;
-    background:linear-gradient(
-        135deg,
-        #1475f5,
-        #0c55bd
-    );
-    color:white;
+    height:56px;
+    border:1px solid #3189ff;
+    border-radius:11px;
+    background:#1677ff;
+    color:#fff;
     font-size:13px;
     font-weight:900;
     letter-spacing:1.5px;
+    cursor:pointer;
     transition:.2s;
 }
 
-.inject-button:hover{
-    filter:brightness(1.08);
-}
-
 .inject-button:active{
-    transform:scale(.985);
+    transform:scale(.99);
 }
 
 .menu-footer{
-    margin-top:22px;
+    margin-top:18px;
     text-align:center;
-    color:#3f4e60;
-    font-size:9px;
-    letter-spacing:1.5px;
+    color:#4d5e71;
+    font-size:8px;
+    font-weight:800;
+    letter-spacing:1.4px;
 }
-
-/* MODAL */
 
 .modal{
     position:fixed;
     inset:0;
-    z-index:20;
-    display:none;
+    z-index:50;
+    display:flex;
     align-items:center;
     justify-content:center;
     padding:20px;
-    background:rgba(0,0,0,.72);
-    backdrop-filter:blur(7px);
+    background:rgba(1,5,9,.84);
+    backdrop-filter:blur(8px);
+    opacity:0;
+    pointer-events:none;
+    transition:.22s;
 }
 
 .modal.show{
-    display:flex;
+    opacity:1;
+    pointer-events:auto;
 }
 
 .modal-box{
-    width:min(510px,100%);
-    padding:24px;
-    border:1px solid #213348;
+    width:100%;
+    max-width:450px;
+    padding:25px;
+    border:1px solid #1d3045;
     border-radius:17px;
-    background:#080f18;
-    box-shadow:0 25px 80px rgba(0,0,0,.65);
-    animation:modalIn .25s ease both;
+    background:#08111c;
+    box-shadow:0 25px 80px rgba(0,0,0,.6);
+    transform:translateY(12px);
+    transition:.22s;
 }
 
-@keyframes modalIn{
-    from{
-        opacity:0;
-        transform:translateY(12px) scale(.98);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0) scale(1);
-    }
+.modal.show .modal-box{
+    transform:translateY(0);
 }
 
 .modal-title{
-    font-size:18px;
-    font-weight:900;
-    letter-spacing:.7px;
+    color:#fff;
     text-align:center;
+    font-size:17px;
+    font-weight:900;
+    letter-spacing:1px;
 }
 
 .modal-subtitle{
-    margin-top:7px;
-    color:#738194;
-    font-size:11px;
-    line-height:1.6;
+    margin-top:9px;
+    color:#78899b;
     text-align:center;
+    font-size:10px;
+    line-height:1.55;
 }
 
 .game-options{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:1fr 1fr;
     gap:12px;
-    margin-top:22px;
+    margin-top:21px;
 }
 
 .game-option{
     overflow:hidden;
     padding:0;
-    border:1px solid #203247;
-    border-radius:12px;
-    background:#0b131e;
-    color:white;
+    border:1px solid #20344a;
+    border-radius:13px;
+    background:#0a1420;
+    cursor:pointer;
     transition:.2s;
 }
 
-.game-option:hover{
-    border-color:#287bd4;
-    transform:translateY(-2px);
+.game-option:active{
+    transform:scale(.98);
 }
 
 .game-option img{
     display:block;
     width:100%;
-    height:135px;
+    height:130px;
     object-fit:cover;
 }
 
 .game-option-name{
-    padding:12px 8px;
+    padding:13px 8px;
+    color:#e7edf4;
     font-size:10px;
-    font-weight:800;
-    letter-spacing:.8px;
+    font-weight:900;
+    letter-spacing:.7px;
 }
 
 .close-button{
     width:100%;
-    height:46px;
-    margin-top:13px;
-    border:1px solid #26384c;
-    border-radius:9px;
-    background:#0c1520;
-    color:#a9b5c3;
-    font-size:11px;
-    font-weight:800;
+    height:47px;
+    margin-top:12px;
+    border:1px solid #26394d;
+    border-radius:10px;
+    background:#0c1724;
+    color:#9ba9b8;
+    font-size:10px;
+    font-weight:900;
     letter-spacing:1px;
+    cursor:pointer;
 }
 
-.close-button:active{
-    transform:scale(.98);
-}.process-icon{
-    width:60px;
-    height:60px;
-    margin:4px auto 18px;
+.process-icon{
     display:flex;
-    align-items:center;
     justify-content:center;
-    border:1px solid #21466d;
-    border-radius:50%;
-    background:#091827;
+    margin-bottom:19px;
 }
 
 .loader{
-    width:25px;
-    height:25px;
-    border:2px solid #20374e;
-    border-top-color:var(--light);
+    width:43px;
+    height:43px;
+    border:3px solid #20354b;
+    border-top-color:#69b7ff;
     border-radius:50%;
     animation:spin .8s linear infinite;
 }
@@ -651,95 +583,94 @@ button{
 }
 
 .process-message{
-    margin-top:12px;
+    margin-top:9px;
+    min-height:31px;
+    color:#7f90a2;
     text-align:center;
-    color:#8d9bac;
-    font-size:11px;
+    font-size:10px;
+    line-height:1.5;
 }
 
 .process-bar{
     width:100%;
     height:5px;
-    margin-top:22px;
+    margin-top:19px;
     overflow:hidden;
-    border-radius:5px;
+    border-radius:10px;
     background:#142131;
 }
 
 .process-progress{
     width:0%;
     height:100%;
-    border-radius:5px;
-    background:var(--blue);
+    border-radius:10px;
+    background:#1677ff;
     transition:width .35s ease;
 }
 
-/* SUCCESS */
-
 .success-icon{
-    width:62px;
-    height:62px;
+    width:54px;
+    height:54px;
     margin:0 auto 17px;
     display:flex;
     align-items:center;
     justify-content:center;
-    border:1px solid #2768a7;
     border-radius:50%;
-    background:#091827;
+    border:1px solid #24588c;
+    background:#0b2744;
 }
 
 .success-icon svg{
-    width:31px;
-    height:31px;
+    width:27px;
+    height:27px;
     fill:none;
-    stroke:var(--light);
-    stroke-width:1.5;
+    stroke:#69b7ff;
+    stroke-width:1.6;
     stroke-linecap:round;
     stroke-linejoin:round;
 }
 
 .success-details{
-    margin-top:12px;
+    margin-top:13px;
     padding:13px;
-    border:1px solid #1d2d40;
-    border-radius:9px;
-    background:#0b131d;
+    border:1px solid #1a2d42;
+    border-radius:10px;
+    background:#09131f;
 }
 
 .success-details-label{
-    color:#657589;
+    color:#627487;
     font-size:8px;
+    font-weight:900;
     letter-spacing:1px;
-    font-weight:800;
 }
 
 .success-details-value{
-    margin-top:5px;
-    color:#dbe5ef;
+    margin-top:6px;
+    color:#dbe5ee;
     font-size:10px;
+    font-weight:800;
     line-height:1.5;
 }
 
-/* EXPIRED */
-
 .expired-icon{
-    width:62px;
-    height:62px;
+    width:54px;
+    height:54px;
     margin:0 auto 17px;
     display:flex;
     align-items:center;
     justify-content:center;
-    border:1px solid #6b3038;
     border-radius:50%;
-    background:#1a0c10;
+    border:1px solid #6d2935;
+    background:#301019;
 }
 
 .expired-icon svg{
-    width:30px;
-    height:30px;
+    width:27px;
+    height:27px;
     fill:none;
-    stroke:#ff6675;
-    stroke-width:1.5;
+    stroke:#ff6878;
+    stroke-width:1.6;
     stroke-linecap:round;
     stroke-linejoin:round;
 }
@@ -749,48 +680,58 @@ button{
     align-items:center;
     justify-content:center;
     width:100%;
-    height:47px;
-    margin-top:20px;
-    border:1px solid #3177c5;
-    border-radius:9px;
-    background:#0d4f96;
-    color:white;
+    height:48px;
+    margin-top:18px;
+    border:1px solid #5868d9;
+    border-radius:10px;
+    background:#5865f2;
+    color:#fff;
     text-decoration:none;
     font-size:10px;
     font-weight:900;
     letter-spacing:1px;
 }
 
+.expired-box .close-button{
+    margin-top:9px;
+}
+
 @media(max-width:600px){
 
-    .menu-container{
-        width:92%;
-    }
-
-    .features{
-        grid-template-columns:1fr;
-    }
-
-    .feature-bypass{
-        grid-column:auto;
-    }
-
-    .game-options{
-        grid-template-columns:1fr;
-    }
-
-    .game-option img{
-        height:145px;
+    .login-container{
+        padding:20px;
     }
 
     .logo{
-        font-size:31px;
+        font-size:27px;
+    }
+
+    .login-box{
+        padding:21px;
+    }
+
+    .menu-container{
+        padding:22px 14px;
+    }
+
+    .features{
+        gap:8px;
+    }
+
+    .feature{
+        min-height:96px;
+        padding:13px;
     }
 
     .timer{
         font-size:27px;
     }
+
+    .game-option img{
+        height:105px;
+    }
 }
+
 </style>
 </head>
 
@@ -803,15 +744,10 @@ button{
         <div class="logo-area">
 
             <div class="logo-symbol">
-
                 <svg viewBox="0 0 24 24">
-
                     <path d="M12 3L4 7v5c0 5 3.5 8 8 9 4.5-1 8-4 8-9V7l-8-4z"/>
-
                     <path d="M9 12l2 2 4-4"/>
-
                 </svg>
-
             </div>
 
             <div class="logo">
@@ -826,10 +762,7 @@ button{
 
         <div class="login-box">
 
-            <label
-                class="login-label"
-                for="keyInput"
-            >
+            <label class="login-label" for="keyInput">
                 ACCESS KEY
             </label>
 
@@ -856,10 +789,7 @@ button{
                 — acesso por 24 horas
             </div>
 
-            <div
-                id="loginError"
-                class="error"
-            ></div>
+            <div id="loginError" class="error"></div>
 
         </div>
 
@@ -868,10 +798,7 @@ button{
 </section>
 
 
-<section
-    id="menuScreen"
-    class="screen hidden"
->
+<section id="menuScreen" class="screen hidden">
 
     <div class="menu-container">
 
@@ -882,11 +809,8 @@ button{
             </div>
 
             <div class="menu-online">
-
                 <span class="online-dot"></span>
-
                 SYSTEM ONLINE
-
             </div>
 
         </div>
@@ -900,21 +824,18 @@ button{
                     ACCESS STATUS
                 </div>
 
-                <div class="access-type">
-                    BRN-FREE
+                <div id="accessType" class="access-type">
+                    KEY ACCESS
                 </div>
 
             </div>
 
-            <div
-                id="timer"
-                class="timer"
-            >
-                24:00:00
+            <div id="timer" class="timer">
+                ACESSO LIBERADO
             </div>
 
-            <div class="timer-label">
-                TEMPO RESTANTE DO ACESSO
+            <div id="timerLabel" class="timer-label">
+                STATUS DA KEY
             </div>
 
         </div>
@@ -926,10 +847,7 @@ button{
                 RECURSOS DISPONÍVEIS
             </div>
 
-            <div
-                id="selectedCount"
-                class="section-count"
-            >
+            <div id="selectedCount" class="section-count">
                 0 SELECIONADOS
             </div>
 
@@ -938,21 +856,25 @@ button{
 
         <div class="features">
 
+
             <div
                 class="feature"
                 data-feature="AUXÍLIO HS ALTO"
                 onclick="toggleFeature(this)"
             >
 
-                <div class="feature-icon">
+                <div class="feature-top">
 
-                    <svg viewBox="0 0 24 24">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 19V5"/>
+                            <path d="M6 11l6-6 6 6"/>
+                        </svg>
+                    </div>
 
-                        <path d="M12 19V5"/>
-
-                        <path d="M6 11l6-6 6 6"/>
-
-                    </svg>
+                    <div class="feature-status">
+                        DESATIVADO
+                    </div>
 
                 </div>
 
@@ -960,8 +882,8 @@ button{
                     AUXÍLIO HS ALTO
                 </div>
 
-                <div class="feature-status">
-                    DESATIVADO
+                <div class="feature-sub">
+                    Recurso de assistência visual
                 </div>
 
             </div>
@@ -973,19 +895,18 @@ button{
                 onclick="toggleFeature(this)"
             >
 
-                <div class="feature-icon">
+                <div class="feature-top">
 
-                    <svg viewBox="0 0 24 24">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="8" r="3"/>
+                            <path d="M7 20c.5-4 2.2-6 5-6s4.5 2 5 6"/>
+                        </svg>
+                    </div>
 
-                        <circle
-                            cx="12"
-                            cy="8"
-                            r="3"
-                        />
-
-                        <path d="M6 20c.5-4 2.5-6 6-6s5.5 2 6 6"/>
-
-                    </svg>
+                    <div class="feature-status">
+                        DESATIVADO
+                    </div>
 
                 </div>
 
@@ -993,8 +914,8 @@ button{
                     AUXÍLIO HS PESCOÇO
                 </div>
 
-                <div class="feature-status">
-                    DESATIVADO
+                <div class="feature-sub">
+                    Recurso de assistência visual
                 </div>
 
             </div>
@@ -1006,23 +927,19 @@ button{
                 onclick="toggleFeature(this)"
             >
 
-                <div class="feature-icon">
+                <div class="feature-top">
 
-                    <svg viewBox="0 0 24 24">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="5" y="5" width="14" height="14" rx="2"/>
+                            <path d="M9 9h6v6H9z"/>
+                            <path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/>
+                        </svg>
+                    </div>
 
-                        <rect
-                            x="4"
-                            y="6"
-                            width="16"
-                            height="12"
-                            rx="2"
-                        />
-
-                        <path d="M8 3v3M12 3v3M16 3v3"/>
-
-                        <path d="M8 18v3M12 18v3M16 18v3"/>
-
-                    </svg>
+                    <div class="feature-status">
+                        DESATIVADO
+                    </div>
 
                 </div>
 
@@ -1030,8 +947,8 @@ button{
                     OTIMIZADOR DE RAM
                 </div>
 
-                <div class="feature-status">
-                    DESATIVADO
+                <div class="feature-sub">
+                    Otimização de recursos
                 </div>
 
             </div>
@@ -1043,25 +960,19 @@ button{
                 onclick="toggleFeature(this)"
             >
 
-                <div class="feature-icon">
+                <div class="feature-top">
 
-                    <svg viewBox="0 0 24 24">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="7"/>
+                            <circle cx="12" cy="12" r="2"/>
+                            <path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
+                        </svg>
+                    </div>
 
-                        <circle
-                            cx="12"
-                            cy="12"
-                            r="7"
-                        />
-
-                        <circle
-                            cx="12"
-                            cy="12"
-                            r="2"
-                        />
-
-                        <path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
-
-                    </svg>
+                    <div class="feature-status">
+                        DESATIVADO
+                    </div>
 
                 </div>
 
@@ -1069,8 +980,8 @@ button{
                     ESTABILIZAR DE MIRA
                 </div>
 
-                <div class="feature-status">
-                    DESATIVADO
+                <div class="feature-sub">
+                    PRECISION
                 </div>
 
             </div>
@@ -1082,28 +993,27 @@ button{
                 onclick="toggleFeature(this)"
             >
 
-                <div class="feature-icon">
+                <div class="feature-top">
 
-                    <svg viewBox="0 0 24 24">
-
-                        <path d="M12 3l7 4v5c0 4.5-2.8 7.5-7 9-4.2-1.5-7-4.5-7-9V7l7-4z"/>
-
-                        <path d="M9 12l2 2 4-4"/>
-
-                    </svg>
-
-                </div>
-
-                <div class="feature-info">
-
-                    <div class="feature-name">
-                        BYPASS
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 3l7 3v5c0 4.5-2.8 7.5-7 10-4.2-2.5-7-5.5-7-10V6l7-3z"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
                     </div>
 
                     <div class="feature-status">
                         DESATIVADO
                     </div>
 
+                </div>
+
+                <div class="feature-name">
+                    BYPASS
+                </div>
+
+                <div class="feature-sub">
+                    Modo de proteção visual
                 </div>
 
             </div>
@@ -1131,13 +1041,7 @@ button{
 
     </div>
 
-</section>
-
-
-<div
-    id="gameModal"
-    class="modal"
->
+    </section><div id="gameModal" class="modal">
 
     <div class="modal-box">
 
@@ -1148,6 +1052,7 @@ button{
         <div class="modal-subtitle">
             Escolha a versão que deseja utilizar no processo visual.
         </div>
+
 
         <div class="game-options">
 
@@ -1188,6 +1093,7 @@ button{
 
         </div>
 
+
         <button
             class="close-button"
             type="button"
@@ -1201,40 +1107,27 @@ button{
 </div>
 
 
-<div
-    id="processModal"
-    class="modal"
->
+<div id="processModal" class="modal">
 
     <div class="modal-box">
 
         <div class="process-icon">
-
             <div class="loader"></div>
-
         </div>
 
-        <div
-            id="processTitle"
-            class="modal-title"
-        >
+        <div id="processTitle" class="modal-title">
             INJETANDO
         </div>
 
-        <div
-            id="processMessage"
-            class="process-message"
-        >
+        <div id="processMessage" class="process-message">
             Preparando processo...
         </div>
 
         <div class="process-bar">
-
             <div
                 id="processProgress"
                 class="process-progress"
             ></div>
-
         </div>
 
     </div>
@@ -1242,39 +1135,29 @@ button{
 </div>
 
 
-<div
-    id="successModal"
-    class="modal"
->
+<div id="successModal" class="modal">
 
     <div class="modal-box">
 
         <div class="success-icon">
 
             <svg viewBox="0 0 24 24">
-
-                <circle
-                    cx="12"
-                    cy="12"
-                    r="9"
-                />
-
+                <circle cx="12" cy="12" r="9"/>
                 <path d="M7.5 12.5l3 3L17 9"/>
-
             </svg>
 
         </div>
+
 
         <div class="modal-title">
             PROCESSO CONCLUÍDO
         </div>
 
-        <div
-            id="successMessage"
-            class="modal-subtitle"
-        >
+
+        <div id="successMessage" class="modal-subtitle">
             Configurações processadas com sucesso.
         </div>
+
 
         <div class="success-details">
 
@@ -1291,6 +1174,7 @@ button{
 
         </div>
 
+
         <div class="success-details">
 
             <div class="success-details-label">
@@ -1306,6 +1190,7 @@ button{
 
         </div>
 
+
         <button
             class="close-button"
             type="button"
@@ -1319,34 +1204,25 @@ button{
 </div>
 
 
-<div
-    id="expiredModal"
-    class="modal"
->
+<div id="expiredModal" class="modal">
 
     <div class="modal-box expired-box">
 
         <div class="expired-icon">
 
             <svg viewBox="0 0 24 24">
-
-                <circle
-                    cx="12"
-                    cy="12"
-                    r="9"
-                />
-
+                <circle cx="12" cy="12" r="9"/>
                 <path d="M12 7v5"/>
-
                 <path d="M12 16h.01"/>
-
             </svg>
 
         </div>
 
+
         <div class="modal-title">
             SUA KEY EXPIROU
         </div>
+
 
         <div class="modal-subtitle">
 
@@ -1361,6 +1237,7 @@ button{
 
         </div>
 
+
         <a
             class="discord-button"
             href="https://discord.gg/n2GPhRRzd"
@@ -1369,6 +1246,7 @@ button{
         >
             ADQUIRIR AUXÍLIO VIP
         </a>
+
 
         <button
             class="close-button"
@@ -1393,11 +1271,18 @@ const FREE_DURATION =
 const FREE_STORAGE =
     "brando_free_key_start";
 
+const SAVED_KEY_STORAGE =
+    "brando_last_key";
+
+
 let timerInterval = null;
 
 let selectedGame = "";
 
 let selectedFeatures = [];
+
+let currentKey = "";
+
 
 const loginScreen =
     document.getElementById("loginScreen");
@@ -1413,6 +1298,12 @@ const loginError =
 
 const timer =
     document.getElementById("timer");
+
+const timerLabel =
+    document.getElementById("timerLabel");
+
+const accessType =
+    document.getElementById("accessType");
 
 const selectedCount =
     document.getElementById("selectedCount");
@@ -1451,14 +1342,17 @@ const successFeatures =
     document.getElementById("successFeatures");
 
 
+
 function login(){
 
     const key =
         keyInput.value
-        .trim()
-        .toUpperCase();
+            .trim()
+            .toUpperCase();
+
 
     loginError.textContent = "";
+
 
     if(!key){
 
@@ -1468,14 +1362,47 @@ function login(){
         return;
     }
 
+
+    /*
+        BRN-FREE
+
+        A Key gratuita possui
+        timer de 24 horas.
+    */
+
     if(key === FREE_KEY){
 
-        if(isFreeExpired()){
+        const savedStart =
+            localStorage.getItem(
+                FREE_STORAGE
+            );
 
-            showExpired();
 
-            return;
+        if(savedStart){
+
+            const expired =
+                Date.now() -
+                Number(savedStart)
+                >= FREE_DURATION;
+
+
+            if(expired){
+
+                showExpired();
+
+                return;
+            }
+
         }
+
+
+        localStorage.setItem(
+            SAVED_KEY_STORAGE,
+            key
+        );
+
+
+        currentKey = key;
 
         startFreeTimer();
 
@@ -1484,76 +1411,129 @@ function login(){
         return;
     }
 
-    if(!key.startsWith("BRN-")){
 
-        loginError.textContent =
-            "Key não encontrada. Tente novamente.";
+    /*
+        QUALQUER KEY ALEATÓRIA
+        QUE COMECE COM BRN-
+    */
+
+    if(key.startsWith("BRN-")){
+
+        /*
+            Salva a Key digitada
+            para aparecer novamente
+            quando abrir o app.
+        */
+
+        localStorage.setItem(
+            SAVED_KEY_STORAGE,
+            key
+        );
+
+
+        /*
+            Remove eventual timer
+            da Key gratuita.
+        */
+
+        localStorage.removeItem(
+            FREE_STORAGE
+        );
+
+
+        currentKey = key;
+
+        startRandomKeyAccess();
+
+        enterMenu();
 
         return;
     }
 
+
     loginError.textContent =
         "Key não encontrada. Tente novamente.";
+
 }
+
 
 
 function enterMenu(){
 
-    loginScreen.classList.add("hidden");
+    loginScreen.classList.add(
+        "hidden"
+    );
 
-    menuScreen.classList.remove("hidden");
+    menuScreen.classList.remove(
+        "hidden"
+    );
 
-    updateTimer();
+    updateSelectedCount();
+
 }
+
 
 
 function toggleFeature(element){
 
-    if(isFreeExpired()){
-
-        lockFreeAccess();
-
-        return;
-    }
-
     const feature =
         element.dataset.feature;
 
-    element.classList.toggle("selected");
-
     const status =
-        element.querySelector(".feature-status");
+        element.querySelector(
+            ".feature-status"
+        );
+
 
     if(element.classList.contains("selected")){
 
-        if(!selectedFeatures.includes(feature)){
+        element.classList.remove(
+            "selected"
+        );
 
-            selectedFeatures.push(feature);
-
-        }
-
-        status.textContent =
-            "ATIVADO";
-
-    }else{
 
         selectedFeatures =
             selectedFeatures.filter(
                 item => item !== feature
             );
 
+
         status.textContent =
             "DESATIVADO";
+
+    }else{
+
+        element.classList.add(
+            "selected"
+        );
+
+
+        if(!selectedFeatures.includes(feature)){
+
+            selectedFeatures.push(
+                feature
+            );
+
+        }
+
+
+        status.textContent =
+            "ATIVADO";
+
     }
 
+
     updateSelectedCount();
+
 }
+
 
 
 function updateSelectedCount(){
 
     const total =
         selectedFeatures.length;
+
 
     if(total === 1){
 
@@ -1564,26 +1544,40 @@ function updateSelectedCount(){
 
         selectedCount.textContent =
             total + " SELECIONADOS";
+
     }
-    }function openGames(){
 
-    if(isFreeExpired()){
+}
 
-        lockFreeAccess();
 
-        return;
+
+function openGames(){
+
+    if(currentKey === FREE_KEY){
+
+        if(isFreeExpired()){
+
+            lockFreeAccess();
+
+            return;
+        }
+
     }
+
 
     if(selectedFeatures.length === 0){
 
         const oldText =
             injectButton.textContent;
 
+
         injectButton.textContent =
             "SELECIONE PELO MENOS 1 RECURSO";
 
+
         injectButton.style.borderColor =
             "#ff5365";
+
 
         setTimeout(() => {
 
@@ -1595,39 +1589,62 @@ function updateSelectedCount(){
 
         },1800);
 
+
         return;
     }
 
-    gameModal.classList.add("show");
+
+    gameModal.classList.add(
+        "show"
+    );
+
 }
+
 
 
 function closeGames(){
 
-    gameModal.classList.remove("show");
+    gameModal.classList.remove(
+        "show"
+    );
+
 }
+
 
 
 function startProcess(game){
 
-    if(isFreeExpired()){
+    if(currentKey === FREE_KEY){
 
-        lockFreeAccess();
+        if(isFreeExpired()){
 
-        return;
+            lockFreeAccess();
+
+            return;
+        }
+
     }
 
-    selectedGame = game;
+
+    selectedGame =
+        game;
+
 
     closeGames();
 
-    processModal.classList.add("show");
+
+    processModal.classList.add(
+        "show"
+    );
+
 
     processTitle.textContent =
         "INJETANDO";
 
+
     processMessage.textContent =
         "Preparando processo...";
+
 
     processProgress.style.width =
         "0%";
@@ -1697,12 +1714,16 @@ function startProcess(game){
 
     setTimeout(() => {
 
-        processModal.classList.remove("show");
+        processModal.classList.remove(
+            "show"
+        );
 
         showSuccess();
 
     },4200);
+
 }
+
 
 
 function showSuccess(){
@@ -1710,20 +1731,33 @@ function showSuccess(){
     successMessage.textContent =
         "Configurações processadas com sucesso.";
 
+
     successGame.textContent =
         selectedGame;
 
-    successFeatures.textContent =
-        selectedFeatures.join(" • ");
 
-    successModal.classList.add("show");
+    successFeatures.textContent =
+        selectedFeatures.join(
+            " • "
+        );
+
+
+    successModal.classList.add(
+        "show"
+    );
+
 }
+
 
 
 function closeSuccess(){
 
-    successModal.classList.remove("show");
+    successModal.classList.remove(
+        "show"
+    );
+
 }
+
 
 
 function startFreeTimer(){
@@ -1739,23 +1773,64 @@ function startFreeTimer(){
         start =
             Date.now().toString();
 
+
         localStorage.setItem(
             FREE_STORAGE,
             start
         );
+
     }
+
+
+    accessType.textContent =
+        "BRN-FREE";
+
+
+    timerLabel.textContent =
+        "TEMPO RESTANTE DO ACESSO";
 
 
     updateTimer();
 
-    clearInterval(timerInterval);
+
+    clearInterval(
+        timerInterval
+    );
+
 
     timerInterval =
         setInterval(
             updateTimer,
             1000
         );
+
 }
+
+
+
+function startRandomKeyAccess(){
+
+    clearInterval(
+        timerInterval
+    );
+
+    timerInterval =
+        null;
+
+
+    accessType.textContent =
+        "KEY VIP";
+
+
+    timer.textContent =
+        "ACESSO LIBERADO";
+
+
+    timerLabel.textContent =
+        "KEY SALVA NESTE DISPOSITIVO";
+
+}
+
 
 
 function updateTimer(){
@@ -1790,9 +1865,11 @@ function updateTimer(){
         timer.textContent =
             "00:00:00";
 
+
         lockFreeAccess();
 
         return;
+
     }
 
 
@@ -1819,12 +1896,17 @@ function updateTimer(){
 
 
     timer.textContent =
+
         String(hours).padStart(2,"0")
-        + ":"
-        + String(minutes).padStart(2,"0")
-        + ":"
-        + String(seconds).padStart(2,"0");
+        + ":" +
+
+        String(minutes).padStart(2,"0")
+        + ":" +
+
+        String(seconds).padStart(2,"0");
+
 }
+
 
 
 function isFreeExpired(){
@@ -1840,6 +1922,7 @@ function isFreeExpired(){
     if(!start){
 
         return false;
+
     }
 
 
@@ -1847,40 +1930,85 @@ function isFreeExpired(){
         Date.now() - start
         >= FREE_DURATION
     );
+
 }
+
 
 
 function lockFreeAccess(){
 
-    clearInterval(timerInterval);
+    clearInterval(
+        timerInterval
+    );
 
-    timerInterval = null;
 
-    menuScreen.classList.add("hidden");
+    timerInterval =
+        null;
+
+
+    menuScreen.classList.add(
+        "hidden"
+    );
+
 
     showExpired();
+
 }
+
 
 
 function showExpired(){
 
-    expiredModal.classList.add("show");
+    expiredModal.classList.add(
+        "show"
+    );
+
 }
+
 
 
 function closeExpired(){
 
-    expiredModal.classList.remove("show");
+    expiredModal.classList.remove(
+        "show"
+    );
 
-    keyInput.value = "";
 
-    loginError.textContent = "";
+    loginError.textContent =
+        "";
 
-    loginScreen.classList.remove("hidden");
+
+    loginScreen.classList.remove(
+        "hidden"
+    );
+
+
+    /*
+        A Key salva continua
+        no campo de login.
+    */
+
 }
 
 
-keyInput.addEventListener(
+
+function loadSavedKey(){
+
+    const savedKey =
+        localStorage.getItem(
+            SAVED_KEY_STORAGE
+        );
+
+
+    if(savedKey){
+
+        keyInput.value =
+            savedKey;
+
+    }
+
+}
+        keyInput.addEventListener(
     "keydown",
     function(event){
 
@@ -1892,6 +2020,7 @@ keyInput.addEventListener(
 
     }
 );
+
 
 
 gameModal.addEventListener(
@@ -1908,6 +2037,7 @@ gameModal.addEventListener(
 );
 
 
+
 successModal.addEventListener(
     "click",
     function(event){
@@ -1922,27 +2052,70 @@ successModal.addEventListener(
 );
 
 
+
+expiredModal.addEventListener(
+    "click",
+    function(event){
+
+        if(event.target === expiredModal){
+
+            closeExpired();
+
+        }
+
+    }
+);
+
+
+
 window.addEventListener(
     "load",
     function(){
 
-        const start =
+        /*
+            Recupera a última Key
+            usada neste dispositivo.
+        */
+
+        loadSavedKey();
+
+
+        /*
+            Se a última Key salva
+            for BRN-FREE, verifica
+            o timer de 24 horas.
+        */
+
+        const savedKey =
             localStorage.getItem(
-                FREE_STORAGE
+                SAVED_KEY_STORAGE
             );
 
 
-        if(start){
+        if(savedKey === FREE_KEY){
 
-            if(isFreeExpired()){
-
-                localStorage.removeItem(
+            const start =
+                localStorage.getItem(
                     FREE_STORAGE
                 );
 
-            }else{
 
-                startFreeTimer();
+            if(start){
+
+                if(isFreeExpired()){
+
+                    localStorage.removeItem(
+                        FREE_STORAGE
+                    );
+
+                }else{
+
+                    currentKey =
+                        FREE_KEY;
+
+                    startFreeTimer();
+
+                }
 
             }
 
@@ -1952,12 +2125,15 @@ window.addEventListener(
 );
 
 
+
 setInterval(
     function(){
 
         if(
-            !menuScreen.classList.contains("hidden")
-            &&
+            currentKey === FREE_KEY &&
+            !menuScreen.classList.contains(
+                "hidden"
+            ) &&
             isFreeExpired()
         ){
 
