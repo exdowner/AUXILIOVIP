@@ -1,797 +1,1022 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>BRANDO XITER · AUXÍLIO</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      user-select: none;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>BRANDO XITER</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+    --blue: #1597ff;
+    --light-blue: #6bc4ff;
+    --white: #ffffff;
+    --border: rgba(255,255,255,.15);
+    --panel: rgba(5, 12, 22, .78);
+}
+
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #06101b;
+    color: white;
+}
+
+body {
+    background:
+        linear-gradient(rgba(2,8,15,.54), rgba(2,8,15,.72)),
+        url("fundo.png") center / cover no-repeat fixed;
+}
+
+/* =========================
+   FUNDO
+========================= */
+
+.background {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background:
+        linear-gradient(120deg, rgba(0,0,0,.38), rgba(0,80,150,.12)),
+        url("fundo.png") center / cover no-repeat;
+    transform: scale(1.04);
+}
+
+.background::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        120deg,
+        rgba(0,0,0,.58),
+        rgba(0,30,55,.28),
+        rgba(0,0,0,.62)
+    );
+}
+
+/* =========================
+   SVG
+========================= */
+
+.logo-svg {
+    width: 42px;
+    height: 42px;
+    margin-bottom: 15px;
+}
+
+.logo-svg path,
+.logo-svg rect,
+.logo-svg circle {
+    fill: none;
+    stroke: white;
+    stroke-width: 2;
+}
+
+/* =========================
+   TELAS
+========================= */
+
+.screen {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    transition:
+        opacity .45s ease,
+        transform .45s ease;
+}
+
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px) scale(.98);
+}
+
+/* =========================
+   LOGIN
+========================= */
+
+.login-box {
+    width: min(410px, 100%);
+    padding: 38px 30px 30px;
+    border: 1px solid var(--border);
+    background: rgba(3, 10, 18, .82);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-radius: 20px;
+    box-shadow: 0 20px 70px rgba(0,0,0,.45);
+    animation: boxIn .7s ease;
+}
+
+@keyframes boxIn {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.brand {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.brand-name {
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.brand-name .xiter {
+    color: var(--light-blue);
+}
+
+.subtitle {
+    color: rgba(255,255,255,.56);
+    font-size: 12px;
+    margin-top: 8px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.field-label {
+    display: block;
+    font-size: 12px;
+    color: rgba(255,255,255,.68);
+    margin-bottom: 9px;
+}
+
+.key-input {
+    width: 100%;
+    height: 52px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,.14);
+    background: rgba(255,255,255,.055);
+    outline: none;
+    color: white;
+    padding: 0 15px;
+    font-size: 14px;
+    transition: .25s;
+}
+
+.key-input::placeholder {
+    color: rgba(255,255,255,.28);
+}
+
+.key-input:focus {
+    border-color: rgba(90,190,255,.8);
+    background: rgba(255,255,255,.075);
+}
+
+.login-button {
+    width: 100%;
+    height: 52px;
+    border: 0;
+    border-radius: 10px;
+    margin-top: 16px;
+    background: #168fe9;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .4px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.login-button:active {
+    transform: scale(.98);
+}
+
+.login-button:hover {
+    background: #249cf2;
+}
+
+.error {
+    min-height: 19px;
+    margin-top: 12px;
+    color: #ff7373;
+    text-align: center;
+    font-size: 12px;
+}
+
+/* =========================
+   MENU
+========================= */
+
+.menu-screen {
+    display: block;
+    padding: 0;
+    overflow-y: auto;
+}
+
+.header {
+    height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 22px;
+    background: rgba(2,9,16,.75);
+    border-bottom: 1px solid rgba(255,255,255,.1);
+    backdrop-filter: blur(16px);
+}
+
+.header-logo {
+    font-size: 21px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.header-logo span {
+    color: var(--light-blue);
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: rgba(255,255,255,.58);
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #57d4ff;
+}
+
+.content {
+    width: min(850px, calc(100% - 28px));
+    margin: 28px auto 50px;
+}
+
+.page-title {
+    font-size: 25px;
+    font-weight: 750;
+    margin-bottom: 6px;
+}
+
+.page-description {
+    color: rgba(255,255,255,.52);
+    font-size: 12px;
+    margin-bottom: 24px;
+}
+
+/* =========================
+   OPTIONS
+========================= */
+
+.options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.option {
+    min-height: 88px;
+    border-radius: 13px;
+    border: 1px solid rgba(255,255,255,.11);
+    background: rgba(3,12,21,.72);
+    backdrop-filter: blur(12px);
+    padding: 17px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+    transition:
+        border-color .2s,
+        background .2s,
+        transform .2s;
+}
+
+.option:hover {
+    border-color: rgba(100,200,255,.4);
+}
+
+.option.active {
+    border-color: rgba(75,180,255,.7);
+    background: rgba(10,65,105,.38);
+}
+
+.option:active {
+    transform: scale(.985);
+}
+
+.option-icon {
+    min-width: 40px;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.option-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: white;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.option-info {
+    min-width: 0;
+}
+
+.option-title {
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.option-description {
+    margin-top: 5px;
+    font-size: 10px;
+    color: rgba(255,255,255,.43);
+}
+
+/* =========================
+   INJETAR
+========================= */
+
+.inject-container {
+    margin-top: 18px;
+}
+
+.inject-button {
+    width: 100%;
+    height: 55px;
+    border: 1px solid rgba(90,190,255,.35);
+    border-radius: 11px;
+    background: #137fcf;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.inject-button:active {
+    transform: scale(.985);
+}
+
+.inject-button:hover {
+    background: #168fe9;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.68);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: .3s;
+}
+
+.modal.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-box {
+    width: min(450px, 100%);
+    background: rgba(5,13,22,.95);
+    border: 1px solid rgba(255,255,255,.13);
+    border-radius: 17px;
+    padding: 25px;
+    transform: translateY(15px);
+    transition: .3s;
+}
+
+.modal.show .modal-box {
+    transform: translateY(0);
+}
+
+.modal-title {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.modal-subtitle {
+    font-size: 11px;
+    color: rgba(255,255,255,.48);
+    margin-top: 7px;
+    margin-bottom: 20px;
+}
+
+.games {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.game {
+    height: 160px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,.12);
+    background: #09131e;
+    cursor: pointer;
+}
+
+.game img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: .65;
+    transition: .3s;
+}
+
+.game:hover img {
+    opacity: .85;
+    transform: scale(1.04);
+}
+
+.game::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        transparent 30%,
+        rgba(0,0,0,.85)
+    );
+}
+
+.game-name {
+    position: absolute;
+    z-index: 2;
+    left: 13px;
+    bottom: 12px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* =========================
+   PROCESSANDO
+========================= */
+
+.process {
+    text-align: center;
+}
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 3px solid rgba(255,255,255,.13);
+    border-top-color: #61c5ff;
+    animation: spin .85s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.process-title {
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.process-text {
+    margin-top: 7px;
+    color: rgba(255,255,255,.5);
+    font-size: 11px;
+}
+
+/* =========================
+   SUCESSO
+========================= */
+
+.success-icon {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #66c8ff;
+    border-radius: 50%;
+    margin: 0 auto 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.success-icon svg {
+    width: 25px;
+    height: 25px;
+    fill: none;
+    stroke: white;
+    stroke-width: 2;
+}
+
+.close-button {
+    width: 100%;
+    height: 46px;
+    margin-top: 20px;
+    border: 0;
+    border-radius: 9px;
+    background: #168fe9;
+    color: white;
+    font-weight: 700;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 600px) {
+    .login-box {
+        padding: 32px 22px 25px;
     }
 
-    body {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #0b0f1a;
-      padding: 12px;
+    .options {
+        grid-template-columns: 1fr;
     }
 
-    /* fundo principal com a imagem fundo.png */
-    .app-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('fundo.png') center/cover no-repeat;
-      z-index: 0;
-      filter: brightness(0.75) saturate(1.2);
-      pointer-events: none;
+    .header {
+        padding: 0 15px;
     }
 
-    /* camada azulada semi-transparente para dar contraste */
-    .app-bg::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(145deg, rgba(0, 80, 200, 0.45) 0%, rgba(0, 30, 70, 0.75) 100%);
-      backdrop-filter: blur(2px);
+    .content {
+        width: calc(100% - 22px);
+        margin-top: 22px;
     }
 
-    .container {
-      position: relative;
-      z-index: 10;
-      width: 100%;
-      max-width: 420px;
-      border-radius: 40px;
-      background: rgba(8, 20, 40, 0.55);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(0, 180, 255, 0.35);
-      box-shadow: 0 25px 40px rgba(0, 0, 0, 0.7), 0 0 0 2px rgba(0, 150, 255, 0.1) inset;
-      padding: 24px 22px 32px;
-      transition: all 0.3s ease;
-      animation: floatIn 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
+    .games {
+        grid-template-columns: 1fr;
     }
 
-    @keyframes floatIn {
-      0% { opacity: 0; transform: translateY(30px) scale(0.96); }
-      100% { opacity: 1; transform: translateY(0) scale(1); }
+    .game {
+        height: 135px;
     }
-
-    /* LOGO / TÍTULO */
-    .logo-area {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-
-    .logo-svg {
-      width: 44px;
-      height: 44px;
-      filter: drop-shadow(0 0 10px rgba(0, 180, 255, 0.7));
-      animation: pulseGlow 2.4s infinite alternate;
-    }
-
-    @keyframes pulseGlow {
-      0% { filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6)); }
-      100% { filter: drop-shadow(0 0 18px #3aa8ff); }
-    }
-
-    .logo-text {
-      font-size: 2rem;
-      font-weight: 800;
-      letter-spacing: 1.5px;
-      text-shadow: 0 0 20px rgba(0, 160, 255, 0.7);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .logo-text .brando {
-      color: #ffffff;
-    }
-
-    .logo-text .xiter {
-      color: #7ad0ff;
-      text-shadow: 0 0 15px #2a9eff, 0 0 30px #0077ff;
-    }
-
-    /* TELA LOGIN */
-    .screen {
-      display: flex;
-      flex-direction: column;
-      transition: opacity 0.3s ease;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    .input-group {
-      margin: 18px 0 14px;
-    }
-
-    .input-group label {
-      display: block;
-      color: #b0e0ff;
-      font-size: 0.9rem;
-      font-weight: 500;
-      margin-bottom: 8px;
-      letter-spacing: 0.5px;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-    }
-
-    .key-input {
-      width: 100%;
-      padding: 16px 18px;
-      border-radius: 28px;
-      border: 2px solid rgba(0, 160, 255, 0.4);
-      background: rgba(0, 20, 45, 0.7);
-      backdrop-filter: blur(5px);
-      font-size: 1rem;
-      color: #fff;
-      outline: none;
-      transition: all 0.25s ease;
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(0, 200, 255, 0.1) inset;
-      font-weight: 500;
-      letter-spacing: 0.5px;
-    }
-
-    .key-input::placeholder {
-      color: rgba(160, 210, 255, 0.6);
-      font-weight: 400;
-      letter-spacing: 0.3px;
-    }
-
-    .key-input:focus {
-      border-color: #2a9eff;
-      box-shadow: 0 0 0 4px rgba(0, 140, 255, 0.3), 0 10px 20px rgba(0, 0, 0, 0.6);
-      background: rgba(0, 30, 65, 0.8);
-    }
-
-    .btn {
-      border: none;
-      padding: 16px 20px;
-      border-radius: 40px;
-      font-weight: 700;
-      font-size: 1.1rem;
-      letter-spacing: 1px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      background: linear-gradient(135deg, #0077ff, #00b4ff);
-      color: #fff;
-      box-shadow: 0 12px 25px -6px #0050b0, 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-      width: 100%;
-      text-transform: uppercase;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn:hover {
-      transform: scale(1.02);
-      background: linear-gradient(135deg, #0088ff, #2ac0ff);
-      box-shadow: 0 18px 30px -8px #0060d0;
-    }
-
-    .btn:active {
-      transform: scale(0.98);
-    }
-
-    .error-msg {
-      color: #ffb0b0;
-      background: rgba(220, 40, 40, 0.25);
-      border-left: 5px solid #ff4d4d;
-      padding: 12px 16px;
-      border-radius: 14px;
-      font-size: 0.9rem;
-      margin: 16px 0 8px;
-      backdrop-filter: blur(4px);
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      animation: shake 0.4s ease;
-    }
-
-    @keyframes shake {
-      0%,100%{ transform: translateX(0); }
-      25%{ transform: translateX(-6px); }
-      75%{ transform: translateX(6px); }
-    }
-
-    /* TELA MENU */
-    .menu-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin: 20px 0 22px;
-    }
-
-    .option-card {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      background: rgba(0, 30, 60, 0.7);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(0, 180, 255, 0.5);
-      border-radius: 28px;
-      padding: 12px 20px 12px 16px;
-      transition: all 0.2s ease;
-      box-shadow: 0 10px 18px -6px black;
-      cursor: pointer;
-    }
-
-    .option-card:hover {
-      background: rgba(0, 70, 130, 0.8);
-      border-color: #3aa8ff;
-      box-shadow: 0 0 15px rgba(0, 160, 255, 0.5);
-    }
-
-    .option-card.active {
-      background: rgba(0, 120, 220, 0.8);
-      border-color: #fff;
-      box-shadow: 0 0 22px #00a6ff;
-    }
-
-    .option-icon {
-      width: 36px;
-      height: 36px;
-      background: rgba(0, 160, 255, 0.2);
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      filter: drop-shadow(0 0 6px #00a0ff);
-    }
-
-    .option-label {
-      flex: 1;
-      font-weight: 600;
-      color: white;
-      font-size: 1rem;
-      text-shadow: 0 2px 6px black;
-      letter-spacing: 0.3px;
-    }
-
-    .option-check {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      background: transparent;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: 0.2s;
-      color: white;
-      font-size: 1rem;
-    }
-
-    .option-card.active .option-check {
-      background: #00d0ff;
-      border-color: white;
-      box-shadow: 0 0 12px #00e0ff;
-    }
-
-    .inject-btn {
-      background: linear-gradient(135deg, #0044aa, #0099ff);
-      margin-top: 8px;
-      box-shadow: 0 16px 30px -8px #003080;
-      font-size: 1.2rem;
-    }
-
-    /* MODAL DE ESCOLHA (FF MAX / NORMAL) */
-    .modal-overlay {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(8px);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      padding: 16px;
-    }
-
-    .modal-box {
-      background: rgba(10, 25, 45, 0.95);
-      backdrop-filter: blur(20px);
-      border: 2px solid #0099ff;
-      border-radius: 48px;
-      max-width: 400px;
-      width: 100%;
-      padding: 30px 22px;
-      text-align: center;
-      box-shadow: 0 0 70px #0066ff;
-      animation: modalPop 0.3s ease;
-    }
-
-    @keyframes modalPop {
-      0% { transform: scale(0.8); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    .modal-box h3 {
-      color: white;
-      font-size: 1.7rem;
-      margin-bottom: 24px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-shadow: 0 0 18px #00a0ff;
-    }
-
-    .game-options {
-      display: flex;
-      gap: 18px;
-      justify-content: center;
-      margin-bottom: 26px;
-      flex-wrap: wrap;
-    }
-
-    .game-option {
-      background: rgba(0, 40, 80, 0.8);
-      border-radius: 28px;
-      padding: 15px 5px 10px;
-      width: 130px;
-      cursor: pointer;
-      border: 2px solid rgba(0, 160, 255, 0.5);
-      transition: all 0.2s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .game-option img {
-      width: 80px;
-      height: 80px;
-      object-fit: contain;
-      border-radius: 18px;
-      filter: drop-shadow(0 8px 8px black);
-    }
-
-    .game-option span {
-      color: white;
-      font-weight: 700;
-      font-size: 0.95rem;
-      text-shadow: 0 2px 6px black;
-    }
-
-    .game-option:hover {
-      background: rgba(0, 110, 220, 0.9);
-      border-color: white;
-      transform: scale(1.04);
-      box-shadow: 0 0 25px #0099ff;
-    }
-
-    /* TELA DE INJETANDO / SUCESSO */
-    .injecting-screen, .success-screen {
-      text-align: center;
-      padding: 18px 0;
-    }
-
-    .injecting-spinner {
-      width: 70px;
-      height: 70px;
-      margin: 10px auto 25px;
-      border: 6px solid rgba(255, 255, 255, 0.15);
-      border-top: 6px solid #2aa0ff;
-      border-right: 6px solid #7ad0ff;
-      border-radius: 50%;
-      animation: spin 0.9s linear infinite;
-      filter: drop-shadow(0 0 18px #0080ff);
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    .injecting-text {
-      color: white;
-      font-size: 1.6rem;
-      font-weight: 700;
-      text-shadow: 0 0 20px #0077ff;
-      letter-spacing: 2px;
-      margin-bottom: 8px;
-    }
-
-    .success-icon {
-      font-size: 4.5rem;
-      margin-bottom: 12px;
-      filter: drop-shadow(0 0 25px #00ffaa);
-      animation: pop 0.5s;
-    }
-
-    .success-title {
-      color: #aaffdd;
-      font-size: 1.8rem;
-      font-weight: 800;
-      text-shadow: 0 0 25px #00cc88;
-      letter-spacing: 1px;
-    }
-
-    .success-sub {
-      color: #b0e0ff;
-      margin-top: 14px;
-      font-size: 1.2rem;
-      font-weight: 500;
-      text-shadow: 0 2px 10px black;
-      background: rgba(0, 0, 0, 0.4);
-      padding: 12px 18px;
-      border-radius: 40px;
-      display: inline-block;
-    }
-
-    /* svg branco */
-    .white-svg {
-      fill: white;
-      stroke: white;
-    }
-
-    /* botão fechar modal */
-    .close-modal {
-      background: transparent;
-      border: 2px solid rgba(255, 255, 255, 0.4);
-      color: white;
-      padding: 12px 25px;
-      border-radius: 40px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.2s;
-      margin-top: 8px;
-    }
-
-    .close-modal:hover {
-      background: rgba(255, 255, 255, 0.15);
-      border-color: white;
-    }
-
-    .flex-center {
-      display: flex;
-      justify-content: center;
-    }
-
-    /* Ajustes de tela */
-    .small-note {
-      color: #90b8e0;
-      font-size: 0.8rem;
-      text-align: center;
-      margin-top: 16px;
-      opacity: 0.8;
-    }
-
-    .bypass-tag {
-      font-size: 0.7rem;
-      background: #0099ff;
-      padding: 2px 10px;
-      border-radius: 40px;
-      color: #001122;
-      font-weight: 800;
-      margin-left: 6px;
-    }
-  </style>
+}
+</style>
 </head>
+
 <body>
-  <div class="app-bg"></div>
 
-  <div class="container" id="appContainer">
-    <!-- LOGO -->
-    <div class="logo-area">
-      <svg class="logo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="white" stroke-width="1.6" stroke-linejoin="round" fill="rgba(255,255,255,0.1)"/>
-        <path d="M2 17L12 22L22 17" stroke="white" stroke-width="1.6" stroke-linejoin="round"/>
-        <path d="M2 12L12 17L22 12" stroke="white" stroke-width="1.6" stroke-linejoin="round"/>
-      </svg>
-      <div class="logo-text">
-        <span class="brando">BRANDO</span>
-        <span class="xiter">XITER</span>
-      </div>
+<div class="background"></div>
+
+<!-- ================= LOGIN ================= -->
+
+<section id="loginScreen" class="screen">
+
+    <div class="login-box">
+
+        <div class="brand">
+
+            <svg class="logo-svg" viewBox="0 0 48 48">
+                <path d="M24 5L40 11V23C40 33 33 40 24 44C15 40 8 33 8 23V11L24 5Z"/>
+                <path d="M17 24L22 29L32 18"/>
+            </svg>
+
+            <div class="brand-name">
+                BRANDO <span class="xiter">XITER</span>
+            </div>
+
+            <div class="subtitle">
+                Auxílio VIP
+            </div>
+
+        </div>
+
+        <label class="field-label">KEY DE ACESSO</label>
+
+        <input
+            id="keyInput"
+            class="key-input"
+            type="text"
+            placeholder="Digite sua Key"
+            autocomplete="off"
+            spellcheck="false"
+        >
+
+        <button class="login-button" onclick="login()">
+            ENTRAR
+        </button>
+
+        <div id="loginError" class="error"></div>
+
     </div>
 
-    <!-- TELA LOGIN -->
-    <div id="loginScreen" class="screen">
-      <div class="input-group">
-        <label>🔑 CHAVE DE ACESSO</label>
-        <input type="text" id="keyInput" class="key-input" placeholder="BRS-XXXX-XXXX" autocomplete="off" spellcheck="false">
-      </div>
-      <button class="btn" id="loginBtn">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-          <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M13 12H3"/>
-        </svg>
-        ENTRAR
-      </button>
-      <div id="loginError" class="error-msg hidden"></div>
-      <div class="small-note">Sua key deve começar com BRN-</div>
-    </div>
+</section>
 
-    <!-- TELA MENU (inicialmente escondida) -->
-    <div id="menuScreen" class="screen hidden">
-      <div class="menu-grid" id="menuGrid">
-        <!-- AUXÍLIO HS ALTO -->
-        <div class="option-card" data-option="hs_alto">
-          <div class="option-icon">🎯</div>
-          <div class="option-label">AUXÍLIO HS ALTO</div>
-          <div class="option-check">✓</div>
-        </div>
-        <!-- AUXÍLIO HS PESCOÇO -->
-        <div class="option-card" data-option="hs_pescoco">
-          <div class="option-icon">🦴</div>
-          <div class="option-label">AUXÍLIO HS PESCOÇO</div>
-          <div class="option-check">✓</div>
-        </div>
-        <!-- OTIMIZADOR DE RAM -->
-        <div class="option-card" data-option="ram">
-          <div class="option-icon">⚡</div>
-          <div class="option-label">OTIMIZADOR DE RAM</div>
-          <div class="option-check">✓</div>
-        </div>
-        <!-- ESTABILIZAR DE MIRA (PRECISION) -->
-        <div class="option-card" data-option="precision">
-          <div class="option-icon">🎯</div>
-          <div class="option-label">ESTABILIZAR DE MIRA (PRECISION)</div>
-          <div class="option-check">✓</div>
-        </div>
-        <!-- BYPASS -->
-        <div class="option-card" data-option="bypass">
-          <div class="option-icon">🛡️</div>
-          <div class="option-label">BYPASS <span class="bypass-tag">SEGURANÇA</span></div>
-          <div class="option-check">✓</div>
-        </div>
-      </div>
 
-      <button class="btn inject-btn" id="injectBtn">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-          <path d="M12 2v20M2 12h20"/>
-        </svg>
-        INJETAR
-      </button>
-    </div>
+<!-- ================= MENU ================= -->
 
-    <!-- TELA INJETANDO (escondida) -->
-    <div id="injectingScreen" class="screen hidden injecting-screen">
-      <div class="injecting-spinner"></div>
-      <div class="injecting-text">INJETANDO...</div>
-      <div style="color: #a0c0ff; margin-top: 10px;">Aguarde, aplicando módulos</div>
-    </div>
+<section id="menuScreen" class="screen menu-screen hidden">
 
-    <!-- TELA SUCESSO (escondida) -->
-    <div id="successScreen" class="screen hidden success-screen">
-      <div class="success-icon">✅</div>
-      <div class="success-title">ARQUIVOS INJETADOS</div>
-      <div class="success-title" style="font-size: 1.6rem; color: #bbffdd;">COM SUCESSO!</div>
-      <div class="success-sub" id="successGameMsg">Abra o Free Fire selecionado.</div>
-    </div>
-  </div>
+    <header class="header">
 
-  <!-- MODAL DE SELEÇÃO FF MAX / NORMAL (fora do container para sobrepor) -->
-  <div id="gameModal" class="modal-overlay hidden">
+        <div class="header-logo">
+            BRANDO <span>XITER</span>
+        </div>
+
+        <div class="status">
+            <span class="status-dot"></span>
+            SISTEMA ONLINE
+        </div>
+
+    </header>
+
+    <main class="content">
+
+        <div class="page-title">
+            Auxílios
+        </div>
+
+        <div class="page-description">
+            Selecione os módulos desejados antes de iniciar.
+        </div>
+
+        <div class="options">
+
+            <div class="option" onclick="toggleOption(this)">
+                <div class="option-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M4 12h16"/>
+                        <path d="M12 4v16"/>
+                        <circle cx="12" cy="12" r="8"/>
+                    </svg>
+                </div>
+
+                <div class="option-info">
+                    <div class="option-title">AUXÍLIO HS ALTO</div>
+                    <div class="option-description">
+                        Módulo de auxílio
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="option" onclick="toggleOption(this)">
+                <div class="option-icon">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="7"/>
+                        <path d="M12 5V2"/>
+                        <path d="M12 22v-3"/>
+                    </svg>
+                </div>
+
+                <div class="option-info">
+                    <div class="option-title">AUXÍLIO HS PESCOÇO</div>
+                    <div class="option-description">
+                        Módulo de auxílio
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="option" onclick="toggleOption(this)">
+                <div class="option-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M6 19V9"/>
+                        <path d="M12 19V5"/>
+                        <path d="M18 19v-7"/>
+                        <path d="M4 19h16"/>
+                    </svg>
+                </div>
+
+                <div class="option-info">
+                    <div class="option-title">OTIMIZADOR DE RAM</div>
+                    <div class="option-description">
+                        Módulo de otimização
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="option" onclick="toggleOption(this)">
+                <div class="option-icon">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="7"/>
+                        <circle cx="12" cy="12" r="2"/>
+                        <path d="M12 2v3"/>
+                        <path d="M12 19v3"/>
+                        <path d="M2 12h3"/>
+                        <path d="M19 12h3"/>
+                    </svg>
+                </div>
+
+                <div class="option-info">
+                    <div class="option-title">ESTABILIZAR DE MIRA</div>
+                    <div class="option-description">
+                        PRECISION
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="option" onclick="toggleOption(this)">
+                <div class="option-icon">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="5" y="10" width="14" height="10" rx="2"/>
+                        <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+                    </svg>
+                </div>
+
+                <div class="option-info">
+                    <div class="option-title">BYPASS</div>
+                    <div class="option-description">
+                        Módulo de segurança
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="inject-container">
+
+            <button class="inject-button" onclick="openGames()">
+                INJETAR
+            </button>
+
+        </div>
+
+    </main>
+
+</section>
+
+
+<!-- ================= ESCOLHA DO JOGO ================= -->
+
+<div id="gameModal" class="modal">
+
     <div class="modal-box">
-      <h3>ESCOLHA O JOGO</h3>
-      <div class="game-options">
-        <div class="game-option" data-game="ffmax">
-          <img src="ffmax.png" alt="FF MAX" onerror="this.style.display='none'">
-          <span>FF MAX</span>
+
+        <div class="modal-title">
+            Selecionar versão
         </div>
-        <div class="game-option" data-game="ffnormal">
-          <img src="FF normal.png" alt="FF Normal" onerror="this.style.display='none'">
-          <span>FF NORMAL</span>
+
+        <div class="modal-subtitle">
+            Escolha a versão do jogo para continuar.
         </div>
-      </div>
-      <button class="close-modal" id="closeModalBtn">CANCELAR</button>
+
+        <div class="games">
+
+            <div class="game" onclick="startProcess('FF MAX')">
+                <img src="ffmax.png" alt="FF MAX">
+                <div class="game-name">FF MAX</div>
+            </div>
+
+            <div class="game" onclick="startProcess('FF NORMAL')">
+                <img src="FF normal.png" alt="FF NORMAL">
+                <div class="game-name">FF NORMAL</div>
+            </div>
+
+        </div>
+
     </div>
-  </div>
 
-  <script>
-    (function() {
-      // ---------- ESTADO ----------
-      const state = {
-        keyValid: false,
-        selectedOptions: new Set(), // armazena data-option dos cards ativos
-        selectedGame: null, // 'ffmax' ou 'ffnormal'
-        injectingTimeout: null,
-      };
+</div>
 
-      // ---------- ELEMENTOS ----------
-      const loginScreen = document.getElementById('loginScreen');
-      const menuScreen = document.getElementById('menuScreen');
-      const injectingScreen = document.getElementById('injectingScreen');
-      const successScreen = document.getElementById('successScreen');
-      const keyInput = document.getElementById('keyInput');
-      const loginBtn = document.getElementById('loginBtn');
-      const loginError = document.getElementById('loginError');
-      const injectBtn = document.getElementById('injectBtn');
-      const menuGrid = document.getElementById('menuGrid');
-      const gameModal = document.getElementById('gameModal');
-      const closeModalBtn = document.getElementById('closeModalBtn');
-      const successGameMsg = document.getElementById('successGameMsg');
 
-      // ---------- FUNÇÕES AUXILIARES ----------
-      function showScreen(screenId) {
-        // esconde todas as telas do container
-        [loginScreen, menuScreen, injectingScreen, successScreen].forEach(s => s.classList.add('hidden'));
-        if (screenId === 'login') loginScreen.classList.remove('hidden');
-        else if (screenId === 'menu') menuScreen.classList.remove('hidden');
-        else if (screenId === 'injecting') injectingScreen.classList.remove('hidden');
-        else if (screenId === 'success') successScreen.classList.remove('hidden');
-      }
+<!-- ================= PROCESSO ================= -->
 
-      function showLoginError(msg) {
-        loginError.textContent = msg;
-        loginError.classList.remove('hidden');
-        // shake no input
-        keyInput.style.animation = 'shake 0.4s ease';
-        setTimeout(() => { keyInput.style.animation = ''; }, 400);
-      }
+<div id="processModal" class="modal">
 
-      function clearLoginError() {
-        loginError.classList.add('hidden');
-      }
+    <div class="modal-box process">
 
-      // ---------- VALIDAÇÃO DA KEY (começa com BRN-) ----------
-      function isValidKey(key) {
-        return key.trim().toUpperCase().startsWith('BRN-');
-      }
+        <div class="loader"></div>
 
-      // ---------- PROCESSO DE LOGIN ----------
-      loginBtn.addEventListener('click', () => {
-        const rawKey = keyInput.value.trim();
-        if (!rawKey) {
-          showLoginError('⚠️ Digite sua Key para continuar.');
-          return;
-        }
-        if (!isValidKey(rawKey)) {
-          showLoginError('❌ Key não encontrada. Tente novamente (deve começar com BRN-)');
-          keyInput.value = ''; // limpa para tentar novamente
-          return;
-        }
+        <div id="processTitle" class="process-title">
+            Inicializando
+        </div>
 
-        // sucesso
-        clearLoginError();
-        state.keyValid = true;
-        keyInput.disabled = true;
-        loginBtn.disabled = true;
-        loginBtn.style.opacity = '0.7';
-        showScreen('menu');
-      });
+        <div id="processText" class="process-text">
+            Preparando sistema...
+        </div>
 
-      // permitir enter
-      keyInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') loginBtn.click();
-      });
+    </div>
 
-      // ---------- SELEÇÃO DAS OPÇÕES (cards) ----------
-      menuGrid.addEventListener('click', (e) => {
-        const card = e.target.closest('.option-card');
-        if (!card) return;
-        const option = card.dataset.option;
-        if (state.selectedOptions.has(option)) {
-          state.selectedOptions.delete(option);
-          card.classList.remove('active');
-        } else {
-          state.selectedOptions.add(option);
-          card.classList.add('active');
-        }
-      });
+</div>
 
-      // ---------- INJETAR (abre modal de seleção do jogo) ----------
-      injectBtn.addEventListener('click', () => {
-        // Pelo menos uma opção selecionada? (não obrigatório, mas é bom ter)
-        // O app permite injetar sem opções? Vamos deixar injetar mesmo sem, mas avisa?
-        // Vamos manter a UX: se nenhuma opção, pode injetar mesmo assim.
-        // Mas para melhorar, se nenhuma, mostramos um alerta? não, permite.
-        if (state.selectedOptions.size === 0) {
-          // só pra evitar frustração, mas pode injetar. Vou deixar mensagem opcional
-          // alert('Nenhum módulo selecionado. Você pode continuar, mas não haverá melhorias.');
-          // Melhor não interromper. Vou seguir.
-        }
-        // Abre modal de escolha do jogo
-        gameModal.classList.remove('hidden');
-      });
 
-      // ---------- MODAL: ESCOLHA DO JOGO ----------
-      gameModal.addEventListener('click', (e) => {
-        // Fechar se clicar fora da modal box (no overlay)
-        if (e.target === gameModal) {
-          gameModal.classList.add('hidden');
-          return;
-        }
-        const gameOption = e.target.closest('.game-option');
-        if (!gameOption) return;
-        const game = gameOption.dataset.game; // 'ffmax' ou 'ffnormal'
-        state.selectedGame = game;
-        gameModal.classList.add('hidden');
+<!-- ================= SUCESSO ================= -->
 
-        // Inicia a injeção
-        startInjection(game);
-      });
+<div id="successModal" class="modal">
 
-      closeModalBtn.addEventListener('click', () => {
-        gameModal.classList.add('hidden');
-      });
+    <div class="modal-box process">
 
-      // ---------- FLUXO DE INJEÇÃO ----------
-      function startInjection(game) {
-        // Esconde menu, mostra tela injetando
-        showScreen('injecting');
+        <div class="success-icon">
 
-        // Limpa timeout anterior se existir
-        if (state.injectingTimeout) {
-          clearTimeout(state.injectingTimeout);
-        }
+            <svg viewBox="0 0 24 24">
+                <path d="M5 12l4 4L19 6"/>
+            </svg>
 
-        // Simula injeção por 2.5 segundos
-        state.injectingTimeout = setTimeout(() => {
-          // Finaliza injeção
-          showScreen('success');
+        </div>
 
-          // Mensagem de acordo com o jogo
-          let gameName = '';
-          if (game === 'ffmax') gameName = 'Free Fire MAX';
-          else if (game === 'ffnormal') gameName = 'Free Fire Normal';
-          else gameName = 'Free Fire';
+        <div class="process-title">
+            Processo concluído
+        </div>
 
-          successGameMsg.textContent = `Abra o ${gameName} para aproveitar!`;
+        <div class="process-text">
+            Arquivos processados com sucesso.
+            <br><br>
+            Abra o jogo selecionado para continuar.
+        </div>
 
-          // Opcional: resetar opções selecionadas? Não, mantém para o usuário ver o que foi injetado.
-          // Mas podemos manter.
+        <button class="close-button" onclick="closeSuccess()">
+            CONCLUIR
+        </button>
 
-          // Após 4 segundos, volta ao menu? ou deixa na tela de sucesso?
-          // Vou deixar na tela de sucesso, e adicionar um botão? Não tem botão.
-          // O usuário pode recarregar. Mas para melhorar UX, após 5 segundos volta ao menu.
-          // Vou colocar um timeout opcional para voltar ao menu após 6 segundos.
-          // Mas o usuário pode querer ver a mensagem. Melhor deixar.
-          // Incluo um pequeno delay e volta? Não, vou deixar na tela de sucesso.
+    </div>
 
-          // Mas se quiser, pode adicionar um listener de clique para voltar.
-          // Vou deixar estável.
+</div>
 
-        }, 2500);
-      }
 
-      // ---------- RESET / INICIALIZAÇÃO ----------
-      // Nenhum estado extra a resetar.
+<script>
 
-      // Se o usuário recarregar, tudo limpo.
+/* =========================
+   LOGIN
+========================= */
 
-      // Prevenir comportamento de arrastar imagem
-      document.querySelectorAll('img').forEach(img => {
-        img.addEventListener('dragstart', (e) => e.preventDefault());
-      });
+function login() {
 
-      // Ajuste: o fundo está aplicado via classe .app-bg, que usa fundo.png
-      // A imagem ffmax.png e FF normal.png serão carregadas no modal.
+    const input = document.getElementById("keyInput");
+    const error = document.getElementById("loginError");
 
-      // Pequeno detalhe: ao clicar no botão injetar, se nenhum jogo for escolhido e fechar modal,
-      // volta pro menu normalmente.
+    const key = input.value.trim();
 
-      // Melhorar acessibilidade: fechar modal com ESC
-      window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !gameModal.classList.contains('hidden')) {
-          gameModal.classList.add('hidden');
-        }
-      });
+    if (!key) {
+        error.textContent = "Digite uma Key para continuar.";
+        return;
+    }
 
-      // Inicializa mostrando tela de login
-      showScreen('login');
+    /*
+       Validação solicitada:
+       somente Keys começando com BRN-
+       são aceitas pela interface.
+    */
 
-      // Coloca foco no input
-      keyInput.focus();
+    if (!key.toUpperCase().startsWith("BRN-")) {
 
-      // Se a key já estiver preenchida (autofill), não tem problema.
-    })();
-  </script>
+        error.textContent =
+            "Key não encontrada. Tente novamente.";
+
+        input.focus();
+
+        return;
+    }
+
+    error.textContent = "";
+
+    document.getElementById("loginScreen")
+        .classList.add("hidden");
+
+    setTimeout(() => {
+
+        document.getElementById("menuScreen")
+            .classList.remove("hidden");
+
+    }, 300);
+}
+
+
+/* =========================
+   ENTER NO INPUT
+========================= */
+
+document.getElementById("keyInput")
+.addEventListener("keydown", function(event) {
+
+    if (event.key === "Enter") {
+        login();
+    }
+
+});
+
+
+/* =========================
+   OPÇÕES
+========================= */
+
+function toggleOption(element) {
+
+    element.classList.toggle("active");
+
+}
+
+
+/* =========================
+   ESCOLHER JOGO
+========================= */
+
+function openGames() {
+
+    const modal = document.getElementById("gameModal");
+
+    modal.classList.add("show");
+
+}
+
+
+/* =========================
+   PROCESSO VISUAL
+========================= */
+
+function startProcess(game) {
+
+    document.getElementById("gameModal")
+        .classList.remove("show");
+
+    const process = document.getElementById("processModal");
+
+    const title = document.getElementById("processTitle");
+
+    const text = document.getElementById("processText");
+
+    process.classList.add("show");
+
+    title.textContent = "Inicializando";
+
+    text.textContent =
+        "Preparando " + game + "...";
+
+
+    setTimeout(() => {
+
+        title.textContent = "Processando";
+
+        text.textContent =
+            "Verificando módulos selecionados...";
+
+    }, 1100);
+
+
+    setTimeout(() => {
+
+        title.textContent = "Processando";
+
+        text.textContent =
+            "Preparando os componentes...";
+
+    }, 2200);
+
+
+    setTimeout(() => {
+
+        title.textContent = "Finalizando";
+
+        text.textContent =
+            "Concluindo operação...";
+
+    }, 3300);
+
+
+    setTimeout(() => {
+
+        process.classList.remove("show");
+
+        document.getElementById("successModal")
+            .classList.add("show");
+
+    }, 4400);
+
+}
+
+
+/* =========================
+   FINALIZAR
+========================= */
+
+function closeSuccess() {
+
+    document.getElementById("successModal")
+        .classList.remove("show");
+
+}
+
+</script>
+
 </body>
-</html>
+                      </html>
