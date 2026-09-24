@@ -13,76 +13,57 @@
 }
 
 :root {
-    --blue: #1597ff;
-    --light-blue: #6bc4ff;
-    --white: #ffffff;
-    --border: rgba(255,255,255,.15);
-    --panel: rgba(5, 12, 22, .78);
+    --blue: #168fe9;
+    --light-blue: #69c7ff;
+    --white: #fff;
+    --dark: #050c14;
+    --panel: rgba(4, 12, 21, .82);
+    --border: rgba(255,255,255,.13);
 }
 
-html, body {
+html,
+body {
     margin: 0;
     width: 100%;
     height: 100%;
     overflow: hidden;
     font-family: Arial, Helvetica, sans-serif;
-    background: #06101b;
-    color: white;
+    color: var(--white);
+    background: #050b12;
 }
 
 body {
     background:
-        linear-gradient(rgba(2,8,15,.54), rgba(2,8,15,.72)),
+        linear-gradient(rgba(2,8,15,.55), rgba(2,8,15,.75)),
         url("fundo.png") center / cover no-repeat fixed;
 }
 
-/* =========================
-   FUNDO
-========================= */
+/* FUNDO */
 
 .background {
     position: fixed;
     inset: 0;
     z-index: -2;
     background:
-        linear-gradient(120deg, rgba(0,0,0,.38), rgba(0,80,150,.12)),
+        linear-gradient(120deg, rgba(0,0,0,.4), rgba(0,65,120,.12)),
         url("fundo.png") center / cover no-repeat;
-    transform: scale(1.04);
+    transform: scale(1.03);
 }
 
 .background::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        120deg,
-        rgba(0,0,0,.58),
-        rgba(0,30,55,.28),
-        rgba(0,0,0,.62)
-    );
+    background:
+        linear-gradient(
+            120deg,
+            rgba(0,0,0,.6),
+            rgba(0,25,50,.25),
+            rgba(0,0,0,.7)
+        );
 }
 
-/* =========================
-   SVG
-========================= */
-
-.logo-svg {
-    width: 42px;
-    height: 42px;
-    margin-bottom: 15px;
-}
-
-.logo-svg path,
-.logo-svg rect,
-.logo-svg circle {
-    fill: none;
-    stroke: white;
-    stroke-width: 2;
-}
-
-/* =========================
-   TELAS
-========================= */
+/* TELAS */
 
 .screen {
     position: absolute;
@@ -92,8 +73,8 @@ body {
     align-items: center;
     padding: 20px;
     transition:
-        opacity .45s ease,
-        transform .45s ease;
+        opacity .4s ease,
+        transform .4s ease;
 }
 
 .hidden {
@@ -102,27 +83,43 @@ body {
     transform: translateY(20px) scale(.98);
 }
 
-/* =========================
-   LOGIN
-========================= */
+/* LOGO */
+
+.logo-svg {
+    width: 43px;
+    height: 43px;
+    margin-bottom: 15px;
+}
+
+.logo-svg path,
+.logo-svg circle {
+    fill: none;
+    stroke: white;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* LOGIN */
 
 .login-box {
     width: min(410px, 100%);
     padding: 38px 30px 30px;
     border: 1px solid var(--border);
-    background: rgba(3, 10, 18, .82);
+    border-radius: 20px;
+    background: rgba(3,10,18,.84);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
-    border-radius: 20px;
-    box-shadow: 0 20px 70px rgba(0,0,0,.45);
-    animation: boxIn .7s ease;
+    box-shadow: 0 25px 70px rgba(0,0,0,.5);
+    animation: loginIn .7s ease;
 }
 
-@keyframes boxIn {
+@keyframes loginIn {
     from {
         opacity: 0;
         transform: translateY(25px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -131,7 +128,7 @@ body {
 
 .brand {
     text-align: center;
-    margin-bottom: 32px;
+    margin-bottom: 31px;
 }
 
 .brand-name {
@@ -140,54 +137,54 @@ body {
     letter-spacing: 1.5px;
 }
 
-.brand-name .xiter {
+.brand-name span {
     color: var(--light-blue);
 }
 
 .subtitle {
-    color: rgba(255,255,255,.56);
-    font-size: 12px;
     margin-top: 8px;
+    color: rgba(255,255,255,.5);
+    font-size: 11px;
     letter-spacing: 1px;
     text-transform: uppercase;
 }
 
 .field-label {
     display: block;
-    font-size: 12px;
-    color: rgba(255,255,255,.68);
     margin-bottom: 9px;
+    color: rgba(255,255,255,.68);
+    font-size: 12px;
 }
 
 .key-input {
     width: 100%;
     height: 52px;
-    border-radius: 10px;
-    border: 1px solid rgba(255,255,255,.14);
-    background: rgba(255,255,255,.055);
-    outline: none;
-    color: white;
     padding: 0 15px;
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 10px;
+    outline: none;
+    background: rgba(255,255,255,.055);
+    color: white;
     font-size: 14px;
     transition: .25s;
 }
 
 .key-input::placeholder {
-    color: rgba(255,255,255,.28);
+    color: rgba(255,255,255,.27);
 }
 
 .key-input:focus {
-    border-color: rgba(90,190,255,.8);
-    background: rgba(255,255,255,.075);
+    border-color: rgba(90,190,255,.75);
+    background: rgba(255,255,255,.08);
 }
 
 .login-button {
     width: 100%;
     height: 52px;
+    margin-top: 16px;
     border: 0;
     border-radius: 10px;
-    margin-top: 16px;
-    background: #168fe9;
+    background: var(--blue);
     color: white;
     font-size: 14px;
     font-weight: 700;
@@ -196,25 +193,23 @@ body {
     transition: .2s;
 }
 
-.login-button:active {
-    transform: scale(.98);
-}
-
 .login-button:hover {
     background: #249cf2;
 }
 
+.login-button:active {
+    transform: scale(.98);
+}
+
 .error {
-    min-height: 19px;
+    min-height: 18px;
     margin-top: 12px;
-    color: #ff7373;
+    color: #ff7474;
     text-align: center;
     font-size: 12px;
 }
 
-/* =========================
-   MENU
-========================= */
+/* MENU */
 
 .menu-screen {
     display: block;
@@ -224,11 +219,11 @@ body {
 
 .header {
     height: 76px;
+    padding: 0 22px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 22px;
-    background: rgba(2,9,16,.75);
+    background: rgba(2,9,16,.78);
     border-bottom: 1px solid rgba(255,255,255,.1);
     backdrop-filter: blur(16px);
 }
@@ -247,15 +242,15 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 11px;
-    color: rgba(255,255,255,.58);
+    color: rgba(255,255,255,.55);
+    font-size: 10px;
 }
 
 .status-dot {
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: #57d4ff;
+    background: #62caff;
 }
 
 .content {
@@ -264,20 +259,18 @@ body {
 }
 
 .page-title {
+    margin-bottom: 6px;
     font-size: 25px;
     font-weight: 750;
-    margin-bottom: 6px;
 }
 
 .page-description {
-    color: rgba(255,255,255,.52);
-    font-size: 12px;
     margin-bottom: 24px;
+    color: rgba(255,255,255,.5);
+    font-size: 12px;
 }
 
-/* =========================
-   OPTIONS
-========================= */
+/* OPÇÕES */
 
 .options {
     display: grid;
@@ -287,14 +280,14 @@ body {
 
 .option {
     min-height: 88px;
-    border-radius: 13px;
-    border: 1px solid rgba(255,255,255,.11);
-    background: rgba(3,12,21,.72);
-    backdrop-filter: blur(12px);
     padding: 17px;
     display: flex;
     align-items: center;
     gap: 15px;
+    border: 1px solid rgba(255,255,255,.11);
+    border-radius: 13px;
+    background: rgba(3,12,21,.72);
+    backdrop-filter: blur(12px);
     cursor: pointer;
     transition:
         border-color .2s,
@@ -308,7 +301,7 @@ body {
 
 .option.active {
     border-color: rgba(75,180,255,.7);
-    background: rgba(10,65,105,.38);
+    background: rgba(10,65,105,.4);
 }
 
 .option:active {
@@ -319,11 +312,11 @@ body {
     min-width: 40px;
     width: 40px;
     height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: 1px solid rgba(255,255,255,.16);
     border-radius: 9px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .option-icon svg {
@@ -347,13 +340,11 @@ body {
 
 .option-description {
     margin-top: 5px;
+    color: rgba(255,255,255,.42);
     font-size: 10px;
-    color: rgba(255,255,255,.43);
 }
 
-/* =========================
-   INJETAR
-========================= */
+/* BOTÃO INJETAR */
 
 .inject-container {
     margin-top: 18px;
@@ -372,27 +363,26 @@ body {
     transition: .2s;
 }
 
-.inject-button:active {
-    transform: scale(.985);
-}
-
 .inject-button:hover {
     background: #168fe9;
 }
 
-/* =========================
-   MODAL
-========================= */
+.inject-button:active {
+    transform: scale(.985);
+}
+
+/* MODAIS */
 
 .modal {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,.68);
-    backdrop-filter: blur(10px);
+    z-index: 20;
+    padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    background: rgba(0,0,0,.68);
+    backdrop-filter: blur(10px);
     opacity: 0;
     pointer-events: none;
     transition: .3s;
@@ -404,11 +394,11 @@ body {
 }
 
 .modal-box {
-    width: min(450px, 100%);
-    background: rgba(5,13,22,.95);
+    width: min(450px,100%);
+    padding: 25px;
     border: 1px solid rgba(255,255,255,.13);
     border-radius: 17px;
-    padding: 25px;
+    background: rgba(5,13,22,.96);
     transform: translateY(15px);
     transition: .3s;
 }
@@ -423,11 +413,13 @@ body {
 }
 
 .modal-subtitle {
-    font-size: 11px;
-    color: rgba(255,255,255,.48);
     margin-top: 7px;
     margin-bottom: 20px;
+    color: rgba(255,255,255,.48);
+    font-size: 11px;
 }
+
+/* JOGOS */
 
 .games {
     display: grid;
@@ -436,11 +428,11 @@ body {
 }
 
 .game {
-    height: 160px;
     position: relative;
+    height: 160px;
     overflow: hidden;
-    border-radius: 12px;
     border: 1px solid rgba(255,255,255,.12);
+    border-radius: 12px;
     background: #09131e;
     cursor: pointer;
 }
@@ -466,7 +458,7 @@ body {
     inset: 0;
     background: linear-gradient(
         transparent 30%,
-        rgba(0,0,0,.85)
+        rgba(0,0,0,.88)
     );
 }
 
@@ -479,9 +471,7 @@ body {
     font-weight: 700;
 }
 
-/* =========================
-   PROCESSANDO
-========================= */
+/* PROCESSAMENTO */
 
 .process {
     text-align: center;
@@ -490,11 +480,11 @@ body {
 .loader {
     width: 48px;
     height: 48px;
-    border-radius: 50%;
+    margin: 0 auto 20px;
     border: 3px solid rgba(255,255,255,.13);
     border-top-color: #61c5ff;
+    border-radius: 50%;
     animation: spin .85s linear infinite;
-    margin: 0 auto 20px;
 }
 
 @keyframes spin {
@@ -512,21 +502,20 @@ body {
     margin-top: 7px;
     color: rgba(255,255,255,.5);
     font-size: 11px;
+    line-height: 1.6;
 }
 
-/* =========================
-   SUCESSO
-========================= */
+/* SUCESSO */
 
 .success-icon {
     width: 50px;
     height: 50px;
-    border: 2px solid #66c8ff;
-    border-radius: 50%;
     margin: 0 auto 18px;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    border: 2px solid #66c8ff;
+    border-radius: 50%;
 }
 
 .success-icon svg {
@@ -535,6 +524,8 @@ body {
     fill: none;
     stroke: white;
     stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 .close-button {
@@ -543,16 +534,16 @@ body {
     margin-top: 20px;
     border: 0;
     border-radius: 9px;
-    background: #168fe9;
+    background: var(--blue);
     color: white;
     font-weight: 700;
+    cursor: pointer;
 }
 
-/* =========================
-   RESPONSIVO
-========================= */
+/* RESPONSIVO */
 
 @media (max-width: 600px) {
+
     .login-box {
         padding: 32px 22px 25px;
     }
@@ -585,7 +576,7 @@ body {
 
 <div class="background"></div>
 
-<!-- ================= LOGIN ================= -->
+<!-- LOGIN -->
 
 <section id="loginScreen" class="screen">
 
@@ -599,16 +590,18 @@ body {
             </svg>
 
             <div class="brand-name">
-                BRANDO <span class="xiter">XITER</span>
+                BRANDO <span>XITER</span>
             </div>
 
             <div class="subtitle">
-                Auxílio VIP
+                Sistema de auxílio
             </div>
 
         </div>
 
-        <label class="field-label">KEY DE ACESSO</label>
+        <label class="field-label">
+            KEY DE ACESSO
+        </label>
 
         <input
             id="keyInput"
@@ -630,7 +623,7 @@ body {
 </section>
 
 
-<!-- ================= MENU ================= -->
+<!-- MENU -->
 
 <section id="menuScreen" class="screen menu-screen hidden">
 
@@ -660,62 +653,85 @@ body {
         <div class="options">
 
             <div class="option" onclick="toggleOption(this)">
+
                 <div class="option-icon">
+
                     <svg viewBox="0 0 24 24">
                         <path d="M4 12h16"/>
                         <path d="M12 4v16"/>
                         <circle cx="12" cy="12" r="8"/>
                     </svg>
+
                 </div>
 
                 <div class="option-info">
-                    <div class="option-title">AUXÍLIO HS ALTO</div>
+                    <div class="option-title">
+                        AUXÍLIO HS ALTO
+                    </div>
+
                     <div class="option-description">
                         Módulo de auxílio
                     </div>
                 </div>
+
             </div>
 
 
             <div class="option" onclick="toggleOption(this)">
+
                 <div class="option-icon">
+
                     <svg viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="7"/>
                         <path d="M12 5V2"/>
                         <path d="M12 22v-3"/>
                     </svg>
+
                 </div>
 
                 <div class="option-info">
-                    <div class="option-title">AUXÍLIO HS PESCOÇO</div>
+                    <div class="option-title">
+                        AUXÍLIO HS PESCOÇO
+                    </div>
+
                     <div class="option-description">
                         Módulo de auxílio
                     </div>
                 </div>
+
             </div>
 
 
             <div class="option" onclick="toggleOption(this)">
+
                 <div class="option-icon">
+
                     <svg viewBox="0 0 24 24">
                         <path d="M6 19V9"/>
                         <path d="M12 19V5"/>
                         <path d="M18 19v-7"/>
                         <path d="M4 19h16"/>
                     </svg>
+
                 </div>
 
                 <div class="option-info">
-                    <div class="option-title">OTIMIZADOR DE RAM</div>
+                    <div class="option-title">
+                        OTIMIZADOR DE RAM
+                    </div>
+
                     <div class="option-description">
                         Módulo de otimização
                     </div>
                 </div>
+
             </div>
 
 
             <div class="option" onclick="toggleOption(this)">
+
                 <div class="option-icon">
+
                     <svg viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="7"/>
                         <circle cx="12" cy="12" r="2"/>
@@ -724,31 +740,43 @@ body {
                         <path d="M2 12h3"/>
                         <path d="M19 12h3"/>
                     </svg>
+
                 </div>
 
                 <div class="option-info">
-                    <div class="option-title">ESTABILIZAR DE MIRA</div>
+                    <div class="option-title">
+                        ESTABILIZAR DE MIRA
+                    </div>
+
                     <div class="option-description">
                         PRECISION
                     </div>
                 </div>
+
             </div>
 
 
             <div class="option" onclick="toggleOption(this)">
+
                 <div class="option-icon">
+
                     <svg viewBox="0 0 24 24">
                         <rect x="5" y="10" width="14" height="10" rx="2"/>
                         <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
                     </svg>
+
                 </div>
 
                 <div class="option-info">
-                    <div class="option-title">BYPASS</div>
+                    <div class="option-title">
+                        BYPASS
+                    </div>
+
                     <div class="option-description">
                         Módulo de segurança
                     </div>
                 </div>
+
             </div>
 
         </div>
@@ -767,7 +795,7 @@ body {
 </section>
 
 
-<!-- ================= ESCOLHA DO JOGO ================= -->
+<!-- ESCOLHA DO JOGO -->
 
 <div id="gameModal" class="modal">
 
@@ -784,13 +812,24 @@ body {
         <div class="games">
 
             <div class="game" onclick="startProcess('FF MAX')">
+
                 <img src="ffmax.png" alt="FF MAX">
-                <div class="game-name">FF MAX</div>
+
+                <div class="game-name">
+                    FF MAX
+                </div>
+
             </div>
 
+
             <div class="game" onclick="startProcess('FF NORMAL')">
-                <img src="FF normal.png" alt="FF NORMAL">
-                <div class="game-name">FF NORMAL</div>
+
+                <img src="ffnormal.png" alt="FF NORMAL">
+
+                <div class="game-name">
+                    FF NORMAL
+                </div>
+
             </div>
 
         </div>
@@ -800,7 +839,7 @@ body {
 </div>
 
 
-<!-- ================= PROCESSO ================= -->
+<!-- PROCESSAMENTO -->
 
 <div id="processModal" class="modal">
 
@@ -821,7 +860,7 @@ body {
 </div>
 
 
-<!-- ================= SUCESSO ================= -->
+<!-- SUCESSO -->
 
 <div id="successModal" class="modal">
 
@@ -856,9 +895,7 @@ body {
 
 <script>
 
-/* =========================
-   LOGIN
-========================= */
+/* LOGIN */
 
 function login() {
 
@@ -868,15 +905,12 @@ function login() {
     const key = input.value.trim();
 
     if (!key) {
-        error.textContent = "Digite uma Key para continuar.";
+
+        error.textContent =
+            "Digite uma Key para continuar.";
+
         return;
     }
-
-    /*
-       Validação solicitada:
-       somente Keys começando com BRN-
-       são aceitas pela interface.
-    */
 
     if (!key.toUpperCase().startsWith("BRN-")) {
 
@@ -890,35 +924,34 @@ function login() {
 
     error.textContent = "";
 
-    document.getElementById("loginScreen")
+    document
+        .getElementById("loginScreen")
         .classList.add("hidden");
 
     setTimeout(() => {
 
-        document.getElementById("menuScreen")
+        document
+            .getElementById("menuScreen")
             .classList.remove("hidden");
 
     }, 300);
 }
 
 
-/* =========================
-   ENTER NO INPUT
-========================= */
+/* ENTER NA KEY */
 
-document.getElementById("keyInput")
-.addEventListener("keydown", function(event) {
+document
+    .getElementById("keyInput")
+    .addEventListener("keydown", function(event) {
 
-    if (event.key === "Enter") {
-        login();
-    }
+        if (event.key === "Enter") {
+            login();
+        }
 
-});
+    });
 
 
-/* =========================
-   OPÇÕES
-========================= */
+/* SELECIONAR AUXÍLIO */
 
 function toggleOption(element) {
 
@@ -927,37 +960,38 @@ function toggleOption(element) {
 }
 
 
-/* =========================
-   ESCOLHER JOGO
-========================= */
+/* ABRIR ESCOLHA DO JOGO */
 
 function openGames() {
 
-    const modal = document.getElementById("gameModal");
-
-    modal.classList.add("show");
+    document
+        .getElementById("gameModal")
+        .classList.add("show");
 
 }
 
 
-/* =========================
-   PROCESSO VISUAL
-========================= */
+/* PROCESSO */
 
 function startProcess(game) {
 
-    document.getElementById("gameModal")
+    document
+        .getElementById("gameModal")
         .classList.remove("show");
 
-    const process = document.getElementById("processModal");
+    const process =
+        document.getElementById("processModal");
 
-    const title = document.getElementById("processTitle");
+    const title =
+        document.getElementById("processTitle");
 
-    const text = document.getElementById("processText");
+    const text =
+        document.getElementById("processText");
 
     process.classList.add("show");
 
-    title.textContent = "Inicializando";
+    title.textContent =
+        "Inicializando";
 
     text.textContent =
         "Preparando " + game + "...";
@@ -965,7 +999,8 @@ function startProcess(game) {
 
     setTimeout(() => {
 
-        title.textContent = "Processando";
+        title.textContent =
+            "Processando";
 
         text.textContent =
             "Verificando módulos selecionados...";
@@ -975,7 +1010,8 @@ function startProcess(game) {
 
     setTimeout(() => {
 
-        title.textContent = "Processando";
+        title.textContent =
+            "Processando";
 
         text.textContent =
             "Preparando os componentes...";
@@ -985,7 +1021,8 @@ function startProcess(game) {
 
     setTimeout(() => {
 
-        title.textContent = "Finalizando";
+        title.textContent =
+            "Finalizando";
 
         text.textContent =
             "Concluindo operação...";
@@ -997,7 +1034,8 @@ function startProcess(game) {
 
         process.classList.remove("show");
 
-        document.getElementById("successModal")
+        document
+            .getElementById("successModal")
             .classList.add("show");
 
     }, 4400);
@@ -1005,13 +1043,12 @@ function startProcess(game) {
 }
 
 
-/* =========================
-   FINALIZAR
-========================= */
+/* FECHAR SUCESSO */
 
 function closeSuccess() {
 
-    document.getElementById("successModal")
+    document
+        .getElementById("successModal")
         .classList.remove("show");
 
 }
@@ -1019,4 +1056,4 @@ function closeSuccess() {
 </script>
 
 </body>
-                      </html>
+    </html>
