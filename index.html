@@ -15,37 +15,53 @@
 :root {
     --blue: #168fe9;
     --light-blue: #69c7ff;
-    --white: #fff;
-    --dark: #050c14;
-    --panel: rgba(4, 12, 21, .82);
+    --white: #ffffff;
     --border: rgba(255,255,255,.13);
 }
 
 html,
 body {
     margin: 0;
+    padding: 0;
     width: 100%;
-    height: 100%;
-    overflow: hidden;
+    min-height: 100%;
     font-family: Arial, Helvetica, sans-serif;
-    color: var(--white);
-    background: #050b12;
-}
-
-body {
     background:
         linear-gradient(rgba(2,8,15,.55), rgba(2,8,15,.75)),
         url("fundo.png") center / cover no-repeat fixed;
+    color: var(--white);
+    overflow-x: hidden;
 }
 
-/* FUNDO */
+body {
+    min-height: 100vh;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* BACKGROUND */
 
 .background {
     position: fixed;
     inset: 0;
     z-index: -2;
     background:
-        linear-gradient(120deg, rgba(0,0,0,.4), rgba(0,65,120,.12)),
+        linear-gradient(
+            120deg,
+            rgba(0,0,0,.4),
+            rgba(0,65,120,.12)
+        ),
         url("fundo.png") center / cover no-repeat;
     transform: scale(1.03);
 }
@@ -56,68 +72,128 @@ body {
     inset: 0;
     background:
         linear-gradient(
-            120deg,
-            rgba(0,0,0,.6),
-            rgba(0,25,50,.25),
-            rgba(0,0,0,.7)
+            90deg,
+            transparent 0%,
+            rgba(255,255,255,.035) 50%,
+            transparent 100%
         );
+    animation: backgroundMove 8s linear infinite;
 }
 
-/* TELAS */
+@keyframes backgroundMove {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* DECORATION */
+
+.particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: rgba(255,255,255,.45);
+    border-radius: 50%;
+    animation: particleMove linear infinite;
+}
+
+.particle:nth-child(1) {
+    left: 10%;
+    top: 80%;
+    animation-duration: 8s;
+}
+
+.particle:nth-child(2) {
+    left: 22%;
+    top: 70%;
+    animation-duration: 11s;
+}
+
+.particle:nth-child(3) {
+    left: 38%;
+    top: 90%;
+    animation-duration: 9s;
+}
+
+.particle:nth-child(4) {
+    left: 55%;
+    top: 75%;
+    animation-duration: 12s;
+}
+
+.particle:nth-child(5) {
+    left: 70%;
+    top: 85%;
+    animation-duration: 10s;
+}
+
+.particle:nth-child(6) {
+    left: 84%;
+    top: 65%;
+    animation-duration: 13s;
+}
+
+.particle:nth-child(7) {
+    left: 92%;
+    top: 90%;
+    animation-duration: 9s;
+}
+
+@keyframes particleMove {
+    from {
+        transform: translateY(80px);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: .7;
+    }
+
+    to {
+        transform: translateY(-900px);
+        opacity: 0;
+    }
+}
+
+/* SCREEN */
 
 .screen {
-    position: absolute;
-    inset: 0;
+    min-height: 100vh;
+    width: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
-    padding: 20px;
-    transition:
-        opacity .4s ease,
-        transform .4s ease;
-}
-
-.hidden {
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(20px) scale(.98);
-}
-
-/* LOGO */
-
-.logo-svg {
-    width: 43px;
-    height: 43px;
-    margin-bottom: 15px;
-}
-
-.logo-svg path,
-.logo-svg circle {
-    fill: none;
-    stroke: white;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+    justify-content: center;
+    padding: 25px;
 }
 
 /* LOGIN */
 
-.login-box {
-    width: min(410px, 100%);
-    padding: 38px 30px 30px;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    background: rgba(3,10,18,.84);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    box-shadow: 0 25px 70px rgba(0,0,0,.5);
-    animation: loginIn .7s ease;
+.login-container {
+    width: 100%;
+    max-width: 430px;
+    animation: screenIn .7s ease;
 }
 
-@keyframes loginIn {
+@keyframes screenIn {
     from {
         opacity: 0;
-        transform: translateY(25px);
+        transform: translateY(20px);
     }
 
     to {
@@ -126,365 +202,422 @@ body {
     }
 }
 
-.brand {
+.logo-area {
     text-align: center;
-    margin-bottom: 31px;
+    margin-bottom: 38px;
 }
 
-.brand-name {
-    font-size: 30px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
+.logo-icon {
+    width: 76px;
+    height: 76px;
+    margin: 0 auto 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255,255,255,.3);
+    border-radius: 22px;
+    background: rgba(0,0,0,.22);
+    backdrop-filter: blur(10px);
 }
 
-.brand-name span {
+.logo-icon svg {
+    width: 43px;
+    height: 43px;
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.logo-text {
+    font-size: 39px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    line-height: 1;
+    color: #ffffff;
+}
+
+.logo-text span {
     color: var(--light-blue);
 }
 
-.subtitle {
-    margin-top: 8px;
-    color: rgba(255,255,255,.5);
+.logo-subtitle {
+    margin-top: 11px;
+    color: rgba(255,255,255,.55);
     font-size: 11px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    letter-spacing: 3px;
 }
 
-.field-label {
+/* LOGIN BOX */
+
+.login-box {
+    padding: 28px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: rgba(3,9,16,.72);
+    backdrop-filter: blur(14px);
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.4);
+}
+
+.input-label {
     display: block;
     margin-bottom: 9px;
-    color: rgba(255,255,255,.68);
-    font-size: 12px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,.58);
+}
+
+.input-row {
+    width: 100%;
+    display: flex;
+    gap: 8px;
 }
 
 .key-input {
-    width: 100%;
+    min-width: 0;
+    flex: 1;
     height: 52px;
-    padding: 0 15px;
-    border: 1px solid rgba(255,255,255,.14);
-    border-radius: 10px;
+    padding: 0 16px;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 11px;
     outline: none;
-    background: rgba(255,255,255,.055);
-    color: white;
+    background: rgba(255,255,255,.045);
+    color: #ffffff;
     font-size: 14px;
-    transition: .25s;
+    letter-spacing: 1px;
+    transition: .2s;
 }
 
 .key-input::placeholder {
-    color: rgba(255,255,255,.27);
+    color: rgba(255,255,255,.35);
 }
 
 .key-input:focus {
-    border-color: rgba(90,190,255,.75);
-    background: rgba(255,255,255,.08);
+    border-color: rgba(105,199,255,.7);
+    background: rgba(255,255,255,.065);
+}
+
+.paste-button {
+    height: 52px;
+    padding: 0 15px;
+    border: 1px solid rgba(105,199,255,.35);
+    border-radius: 11px;
+    background: rgba(22,143,233,.12);
+    color: var(--light-blue);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    transition: .2s;
+}
+
+.paste-button:active {
+    transform: scale(.97);
 }
 
 .login-button {
     width: 100%;
-    height: 52px;
-    margin-top: 16px;
+    height: 54px;
+    margin-top: 13px;
     border: 0;
-    border-radius: 10px;
-    background: var(--blue);
-    color: white;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: .4px;
-    cursor: pointer;
+    border-radius: 11px;
+    background: #ffffff;
+    color: #07111b;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 2px;
     transition: .2s;
-}
-
-.login-button:hover {
-    background: #249cf2;
 }
 
 .login-button:active {
     transform: scale(.98);
 }
 
-.error {
-    min-height: 18px;
-    margin-top: 12px;
-    color: #ff7474;
+.free-key {
+    margin-top: 18px;
     text-align: center;
-    font-size: 12px;
+    color: rgba(255,255,255,.45);
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.free-key strong {
+    color: var(--light-blue);
+    font-weight: 800;
+}
+
+.error {
+    min-height: 17px;
+    margin-top: 13px;
+    text-align: center;
+    color: #ff7777;
+    font-size: 11px;
 }
 
 /* MENU */
 
-.menu-screen {
-    display: block;
-    padding: 0;
-    overflow-y: auto;
+.menu-container {
+    width: 100%;
+    max-width: 520px;
+    padding: 20px 0;
+    animation: screenIn .5s ease;
 }
 
-.header {
-    height: 76px;
-    padding: 0 22px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: rgba(2,9,16,.78);
-    border-bottom: 1px solid rgba(255,255,255,.1);
-    backdrop-filter: blur(16px);
+.menu-header {
+    margin-bottom: 22px;
 }
 
-.header-logo {
-    font-size: 21px;
-    font-weight: 800;
-    letter-spacing: 1px;
+.menu-logo {
+    font-size: 27px;
+    font-weight: 900;
+    letter-spacing: 2px;
 }
 
-.header-logo span {
+.menu-logo span {
     color: var(--light-blue);
 }
 
-.status {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: rgba(255,255,255,.55);
+.menu-description {
+    margin-top: 6px;
+    color: rgba(255,255,255,.45);
     font-size: 10px;
+    letter-spacing: 1.5px;
 }
 
-.status-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #62caff;
+.free-status {
+    margin-bottom: 18px;
+    padding: 16px 18px;
+    border: 1px solid rgba(105,199,255,.18);
+    border-radius: 15px;
+    background: rgba(0,45,80,.22);
+    text-align: center;
 }
 
-.content {
-    width: min(850px, calc(100% - 28px));
-    margin: 28px auto 50px;
-}
-
-.page-title {
-    margin-bottom: 6px;
-    font-size: 25px;
-    font-weight: 750;
-}
-
-.page-description {
-    margin-bottom: 24px;
+.free-status-title {
+    margin-bottom: 7px;
     color: rgba(255,255,255,.5);
-    font-size: 12px;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
 }
 
-/* OPÇÕES */
+.timer {
+    color: var(--light-blue);
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    font-variant-numeric: tabular-nums;
+}
 
-.options {
+/* FEATURES */
+
+.features {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    gap: 9px;
 }
 
-.option {
-    min-height: 88px;
-    padding: 17px;
+.feature {
+    min-height: 62px;
     display: flex;
     align-items: center;
     gap: 15px;
-    border: 1px solid rgba(255,255,255,.11);
-    border-radius: 13px;
-    background: rgba(3,12,21,.72);
-    backdrop-filter: blur(12px);
-    cursor: pointer;
-    transition:
-        border-color .2s,
-        background .2s,
-        transform .2s;
+    padding: 13px 15px;
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 14px;
+    background: rgba(0,0,0,.27);
+    backdrop-filter: blur(8px);
+    transition: .2s;
 }
 
-.option:hover {
-    border-color: rgba(100,200,255,.4);
+.feature:hover {
+    border-color: rgba(105,199,255,.32);
+    transform: translateX(3px);
 }
 
-.option.active {
-    border-color: rgba(75,180,255,.7);
-    background: rgba(10,65,105,.4);
-}
-
-.option:active {
-    transform: scale(.985);
-}
-
-.option-icon {
-    min-width: 40px;
-    width: 40px;
-    height: 40px;
+.feature-icon {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
     display: flex;
-    justify-content: center;
     align-items: center;
-    border: 1px solid rgba(255,255,255,.16);
-    border-radius: 9px;
+    justify-content: center;
+    border: 1px solid rgba(105,199,255,.2);
+    border-radius: 10px;
+    background: rgba(22,143,233,.08);
 }
 
-.option-icon svg {
+.feature-icon svg {
     width: 20px;
     height: 20px;
     fill: none;
-    stroke: white;
+    stroke: var(--light-blue);
     stroke-width: 1.7;
     stroke-linecap: round;
     stroke-linejoin: round;
 }
 
-.option-info {
-    min-width: 0;
+.feature-info {
+    flex: 1;
 }
 
-.option-title {
-    font-size: 13px;
-    font-weight: 700;
+.feature-name {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .7px;
 }
 
-.option-description {
-    margin-top: 5px;
-    color: rgba(255,255,255,.42);
-    font-size: 10px;
-}
-
-/* BOTÃO INJETAR */
-
-.inject-container {
-    margin-top: 18px;
+.feature-state {
+    margin-top: 4px;
+    color: rgba(255,255,255,.38);
+    font-size: 9px;
+    letter-spacing: 1px;
 }
 
 .inject-button {
     width: 100%;
-    height: 55px;
-    border: 1px solid rgba(90,190,255,.35);
-    border-radius: 11px;
-    background: #137fcf;
-    color: white;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
+    height: 56px;
+    margin-top: 15px;
+    border: 1px solid rgba(105,199,255,.4);
+    border-radius: 13px;
+    background: rgba(22,143,233,.18);
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 3px;
     transition: .2s;
 }
 
-.inject-button:hover {
-    background: #168fe9;
-}
-
 .inject-button:active {
-    transform: scale(.985);
+    transform: scale(.98);
 }
 
-/* MODAIS */
+/* MODAL */
 
 .modal {
     position: fixed;
     inset: 0;
     z-index: 20;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
+    display: none;
     align-items: center;
-    background: rgba(0,0,0,.68);
-    backdrop-filter: blur(10px);
-    opacity: 0;
-    pointer-events: none;
-    transition: .3s;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0,0,0,.7);
+    backdrop-filter: blur(8px);
 }
 
 .modal.show {
-    opacity: 1;
-    pointer-events: auto;
+    display: flex;
 }
 
 .modal-box {
-    width: min(450px,100%);
-    padding: 25px;
+    width: 100%;
+    max-width: 400px;
+    padding: 27px;
     border: 1px solid rgba(255,255,255,.13);
-    border-radius: 17px;
-    background: rgba(5,13,22,.96);
-    transform: translateY(15px);
-    transition: .3s;
+    border-radius: 20px;
+    background: #071019;
+    box-shadow: 0 25px 70px rgba(0,0,0,.55);
+    animation: modalIn .25s ease;
 }
 
-.modal.show .modal-box {
-    transform: translateY(0);
+@keyframes modalIn {
+    from {
+        opacity: 0;
+        transform: scale(.94) translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
 }
 
 .modal-title {
+    text-align: center;
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 900;
+    letter-spacing: 1px;
 }
 
 .modal-subtitle {
-    margin-top: 7px;
-    margin-bottom: 20px;
-    color: rgba(255,255,255,.48);
-    font-size: 11px;
+    margin-top: 8px;
+    text-align: center;
+    color: rgba(255,255,255,.45);
+    font-size: 10px;
+    line-height: 1.6;
 }
 
-/* JOGOS */
+/* GAME SELECT */
 
-.games {
+.game-options {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: 10px;
+    margin-top: 22px;
 }
 
-.game {
+.game-option {
     position: relative;
-    height: 160px;
     overflow: hidden;
+    padding: 0;
     border: 1px solid rgba(255,255,255,.12);
-    border-radius: 12px;
-    background: #09131e;
-    cursor: pointer;
+    border-radius: 13px;
+    background: rgba(255,255,255,.04);
+    transition: .2s;
 }
 
-.game img {
-    position: absolute;
-    inset: 0;
+.game-option:active {
+    transform: scale(.97);
+}
+
+.game-option img {
+    display: block;
     width: 100%;
-    height: 100%;
+    height: 135px;
     object-fit: cover;
-    opacity: .65;
-    transition: .3s;
 }
 
-.game:hover img {
-    opacity: .85;
-    transform: scale(1.04);
-}
-
-.game::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        transparent 30%,
-        rgba(0,0,0,.88)
-    );
-}
-
-.game-name {
-    position: absolute;
-    z-index: 2;
-    left: 13px;
-    bottom: 12px;
-    font-size: 13px;
-    font-weight: 700;
-}
-
-/* PROCESSAMENTO */
-
-.process {
+.game-option-name {
+    padding: 11px 8px;
     text-align: center;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+/* PROCESS */
+
+.process-icon {
+    width: 54px;
+    height: 54px;
+    margin: 0 auto 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(105,199,255,.25);
+    border-radius: 50%;
+}
+
+.process-icon svg {
+    width: 25px;
+    height: 25px;
+    fill: none;
+    stroke: var(--light-blue);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 .loader {
-    width: 48px;
-    height: 48px;
-    margin: 0 auto 20px;
-    border: 3px solid rgba(255,255,255,.13);
-    border-top-color: #61c5ff;
+    width: 28px;
+    height: 28px;
+    border: 2px solid rgba(255,255,255,.12);
+    border-top-color: var(--light-blue);
     border-radius: 50%;
-    animation: spin .85s linear infinite;
+    animation: spin .8s linear infinite;
 }
 
 @keyframes spin {
@@ -493,80 +626,106 @@ body {
     }
 }
 
-.process-title {
-    font-size: 17px;
-    font-weight: 700;
+.process-message {
+    min-height: 18px;
+    margin-top: 18px;
+    text-align: center;
+    color: var(--light-blue);
+    font-size: 10px;
+    letter-spacing: 1px;
 }
 
-.process-text {
-    margin-top: 7px;
-    color: rgba(255,255,255,.5);
-    font-size: 11px;
-    line-height: 1.6;
-}
+/* SUCCESS */
 
-/* SUCESSO */
-
-.success-icon {
-    width: 50px;
-    height: 50px;
+.success-icon,
+.expired-icon {
+    width: 58px;
+    height: 58px;
     margin: 0 auto 18px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    border: 2px solid #66c8ff;
+    justify-content: center;
+    border: 1px solid rgba(105,199,255,.3);
     border-radius: 50%;
 }
 
-.success-icon svg {
-    width: 25px;
-    height: 25px;
+.success-icon svg,
+.expired-icon svg {
+    width: 28px;
+    height: 28px;
     fill: none;
-    stroke: white;
-    stroke-width: 2;
+    stroke: var(--light-blue);
+    stroke-width: 1.7;
     stroke-linecap: round;
     stroke-linejoin: round;
 }
 
 .close-button {
     width: 100%;
-    height: 46px;
+    height: 48px;
     margin-top: 20px;
-    border: 0;
-    border-radius: 9px;
-    background: var(--blue);
-    color: white;
-    font-weight: 700;
-    cursor: pointer;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 10px;
+    background: rgba(255,255,255,.05);
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
 }
 
-/* RESPONSIVO */
+/* DISCORD */
 
-@media (max-width: 600px) {
+.discord-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 50px;
+    margin-top: 22px;
+    border-radius: 11px;
+    background: #ffffff;
+    color: #071019;
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+}
+
+.expired-box {
+    text-align: center;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 420px) {
+    .screen {
+        padding: 16px;
+    }
 
     .login-box {
-        padding: 32px 22px 25px;
+        padding: 22px;
     }
 
-    .options {
-        grid-template-columns: 1fr;
+    .logo-text {
+        font-size: 32px;
     }
 
-    .header {
-        padding: 0 15px;
+    .game-option img {
+        height: 115px;
+    }
+}
+
+@media (max-height: 700px) {
+    .screen {
+        align-items: flex-start;
     }
 
-    .content {
-        width: calc(100% - 22px);
-        margin-top: 22px;
+    .login-container {
+        margin-top: 20px;
     }
 
-    .games {
-        grid-template-columns: 1fr;
-    }
-
-    .game {
-        height: 135px;
+    .logo-area {
+        margin-bottom: 25px;
     }
 }
 </style>
@@ -576,204 +735,229 @@ body {
 
 <div class="background"></div>
 
+<div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+</div>
+
 <!-- LOGIN -->
 
 <section id="loginScreen" class="screen">
 
-    <div class="login-box">
+    <div class="login-container">
 
-        <div class="brand">
+        <div class="logo-area">
 
-            <svg class="logo-svg" viewBox="0 0 48 48">
-                <path d="M24 5L40 11V23C40 33 33 40 24 44C15 40 8 33 8 23V11L24 5Z"/>
-                <path d="M17 24L22 29L32 18"/>
-            </svg>
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 3L4 7v5c0 5 3.5 8 8 9 4.5-1 8-4 8-9V7l-8-4z"/>
+                    <path d="M9 12l2 2 4-4"/>
+                </svg>
+            </div>
 
-            <div class="brand-name">
+            <div class="logo-text">
                 BRANDO <span>XITER</span>
             </div>
 
-            <div class="subtitle">
-                Sistema de auxílio
+            <div class="logo-subtitle">
+                SYSTEM ACCESS
             </div>
 
         </div>
 
-        <label class="field-label">
-            KEY DE ACESSO
-        </label>
+        <div class="login-box">
 
-        <input
-            id="keyInput"
-            class="key-input"
-            type="text"
-            placeholder="Digite sua Key"
-            autocomplete="off"
-            spellcheck="false"
-        >
+            <label class="input-label">
+                ACCESS KEY
+            </label>
 
-        <button class="login-button" onclick="login()">
-            ENTRAR
-        </button>
+            <div class="input-row">
 
-        <div id="loginError" class="error"></div>
+                <input
+                    id="keyInput"
+                    class="key-input"
+                    type="text"
+                    placeholder="Digite ou cole sua Key"
+                    autocomplete="off"
+                    spellcheck="false"
+                >
+
+                <button
+                    class="paste-button"
+                    type="button"
+                    onclick="pasteKey()"
+                >
+                    COLAR
+                </button>
+
+            </div>
+
+            <button
+                class="login-button"
+                type="button"
+                onclick="login()"
+            >
+                ENTRAR
+            </button>
+
+            <div class="free-key">
+                Key gratuita:
+                <strong>BRN-FREE</strong>
+                — acesso por 24 horas
+            </div>
+
+            <div id="loginError" class="error"></div>
+
+        </div>
 
     </div>
 
 </section>
 
-
 <!-- MENU -->
 
-<section id="menuScreen" class="screen menu-screen hidden">
+<section id="menuScreen" class="screen hidden">
 
-    <header class="header">
+    <div class="menu-container">
 
-        <div class="header-logo">
-            BRANDO <span>XITER</span>
+        <div class="menu-header">
+
+            <div class="menu-logo">
+                BRANDO <span>XITER</span>
+            </div>
+
+            <div class="menu-description">
+                CONFIGURAÇÃO DE RECURSOS
+            </div>
+
         </div>
 
-        <div class="status">
-            <span class="status-dot"></span>
-            SISTEMA ONLINE
+        <div class="free-status">
+
+            <div class="free-status-title">
+                ACESSO BRN-FREE
+            </div>
+
+            <div id="timer" class="timer">
+                24:00:00
+            </div>
+
         </div>
 
-    </header>
+        <div class="features">
 
-    <main class="content">
+            <div class="feature">
 
-        <div class="page-title">
-            Auxílios
-        </div>
-
-        <div class="page-description">
-            Selecione os módulos desejados antes de iniciar.
-        </div>
-
-        <div class="options">
-
-            <div class="option" onclick="toggleOption(this)">
-
-                <div class="option-icon">
-
+                <div class="feature-icon">
                     <svg viewBox="0 0 24 24">
-                        <path d="M4 12h16"/>
-                        <path d="M12 4v16"/>
-                        <circle cx="12" cy="12" r="8"/>
+                        <path d="M12 3l8 4v5c0 4.5-3 7.5-8 9-5-1.5-8-4.5-8-9V7l8-4z"/>
+                        <path d="M9 12l2 2 4-4"/>
                     </svg>
-
                 </div>
 
-                <div class="option-info">
-                    <div class="option-title">
+                <div class="feature-info">
+                    <div class="feature-name">
                         AUXÍLIO HS ALTO
                     </div>
 
-                    <div class="option-description">
-                        Módulo de auxílio
+                    <div class="feature-state">
+                        DISPONÍVEL
                     </div>
                 </div>
 
             </div>
 
+            <div class="feature">
 
-            <div class="option" onclick="toggleOption(this)">
-
-                <div class="option-icon">
-
+                <div class="feature-icon">
                     <svg viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="7"/>
-                        <path d="M12 5V2"/>
-                        <path d="M12 22v-3"/>
+                        <circle cx="12" cy="12" r="8"/>
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M12 4v3"/>
+                        <path d="M12 17v3"/>
+                        <path d="M4 12h3"/>
+                        <path d="M17 12h3"/>
                     </svg>
-
                 </div>
 
-                <div class="option-info">
-                    <div class="option-title">
+                <div class="feature-info">
+                    <div class="feature-name">
                         AUXÍLIO HS PESCOÇO
                     </div>
 
-                    <div class="option-description">
-                        Módulo de auxílio
+                    <div class="feature-state">
+                        DISPONÍVEL
                     </div>
                 </div>
 
             </div>
 
+            <div class="feature">
 
-            <div class="option" onclick="toggleOption(this)">
-
-                <div class="option-icon">
-
+                <div class="feature-icon">
                     <svg viewBox="0 0 24 24">
-                        <path d="M6 19V9"/>
-                        <path d="M12 19V5"/>
-                        <path d="M18 19v-7"/>
-                        <path d="M4 19h16"/>
+                        <path d="M4 17h16"/>
+                        <path d="M6 17V9"/>
+                        <path d="M10 17V6"/>
+                        <path d="M14 17v-4"/>
+                        <path d="M18 17V4"/>
                     </svg>
-
                 </div>
 
-                <div class="option-info">
-                    <div class="option-title">
+                <div class="feature-info">
+                    <div class="feature-name">
                         OTIMIZADOR DE RAM
                     </div>
 
-                    <div class="option-description">
-                        Módulo de otimização
+                    <div class="feature-state">
+                        DISPONÍVEL
                     </div>
                 </div>
 
             </div>
 
+            <div class="feature">
 
-            <div class="option" onclick="toggleOption(this)">
-
-                <div class="option-icon">
-
+                <div class="feature-icon">
                     <svg viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="7"/>
-                        <circle cx="12" cy="12" r="2"/>
-                        <path d="M12 2v3"/>
-                        <path d="M12 19v3"/>
-                        <path d="M2 12h3"/>
-                        <path d="M19 12h3"/>
+                        <circle cx="12" cy="12" r="8"/>
+                        <path d="M12 8v4l3 2"/>
                     </svg>
-
                 </div>
 
-                <div class="option-info">
-                    <div class="option-title">
+                <div class="feature-info">
+                    <div class="feature-name">
                         ESTABILIZAR DE MIRA
                     </div>
 
-                    <div class="option-description">
+                    <div class="feature-state">
                         PRECISION
                     </div>
                 </div>
 
             </div>
 
+            <div class="feature">
 
-            <div class="option" onclick="toggleOption(this)">
-
-                <div class="option-icon">
-
+                <div class="feature-icon">
                     <svg viewBox="0 0 24 24">
                         <rect x="5" y="10" width="14" height="10" rx="2"/>
-                        <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+                        <path d="M8 10V7a4 4 0 018 0v3"/>
                     </svg>
-
                 </div>
 
-                <div class="option-info">
-                    <div class="option-title">
+                <div class="feature-info">
+                    <div class="feature-name">
                         BYPASS
                     </div>
 
-                    <div class="option-description">
-                        Módulo de segurança
+                    <div class="feature-state">
+                        DISPONÍVEL
                     </div>
                 </div>
 
@@ -781,138 +965,271 @@ body {
 
         </div>
 
+        <button
+            class="inject-button"
+            type="button"
+            onclick="openGames()"
+        >
+            INJETAR
+        </button>
 
-        <div class="inject-container">
-
-            <button class="inject-button" onclick="openGames()">
-                INJETAR
-            </button>
-
-        </div>
-
-    </main>
+    </div>
 
 </section>
 
-
-<!-- ESCOLHA DO JOGO -->
+<!-- GAME MODAL -->
 
 <div id="gameModal" class="modal">
 
     <div class="modal-box">
 
         <div class="modal-title">
-            Selecionar versão
+            SELECIONE O JOGO
         </div>
 
         <div class="modal-subtitle">
-            Escolha a versão do jogo para continuar.
+            Escolha a versão que deseja iniciar.
         </div>
 
-        <div class="games">
+        <div class="game-options">
 
-            <div class="game" onclick="startProcess('FF MAX')">
-
+            <button
+                class="game-option"
+                type="button"
+                onclick="startProcess('FF MAX')"
+            >
                 <img src="ffmax.png" alt="FF MAX">
 
-                <div class="game-name">
+                <div class="game-option-name">
                     FF MAX
                 </div>
+            </button>
 
-            </div>
-
-
-            <div class="game" onclick="startProcess('FF NORMAL')">
-
+            <button
+                class="game-option"
+                type="button"
+                onclick="startProcess('FF NORMAL')"
+            >
                 <img src="ffnormal.png" alt="FF NORMAL">
 
-                <div class="game-name">
+                <div class="game-option-name">
                     FF NORMAL
                 </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- PROCESSAMENTO -->
-
-<div id="processModal" class="modal">
-
-    <div class="modal-box process">
-
-        <div class="loader"></div>
-
-        <div id="processTitle" class="process-title">
-            Inicializando
-        </div>
-
-        <div id="processText" class="process-text">
-            Preparando sistema...
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- SUCESSO -->
-
-<div id="successModal" class="modal">
-
-    <div class="modal-box process">
-
-        <div class="success-icon">
-
-            <svg viewBox="0 0 24 24">
-                <path d="M5 12l4 4L19 6"/>
-            </svg>
+            </button>
 
         </div>
 
-        <div class="process-title">
-            Processo concluído
-        </div>
-
-        <div class="process-text">
-            Arquivos processados com sucesso.
-            <br><br>
-            Abra o jogo selecionado para continuar.
-        </div>
-
-        <button class="close-button" onclick="closeSuccess()">
-            CONCLUIR
+        <button
+            class="close-button"
+            type="button"
+            onclick="closeGames()"
+        >
+            CANCELAR
         </button>
 
     </div>
 
 </div>
 
+<!-- PROCESS MODAL -->
+
+<div id="processModal" class="modal">
+
+    <div class="modal-box">
+
+        <div class="process-icon">
+            <div class="loader"></div>
+        </div>
+
+        <div id="processTitle" class="modal-title">
+            PROCESSANDO
+        </div>
+
+        <div id="processMessage" class="process-message">
+            Preparando processo...
+        </div>
+
+                        <!-- SUCCESS MODAL -->
+
+<div id="successModal" class="modal">
+
+    <div class="modal-box">
+
+        <div class="success-icon">
+
+            <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M8 12l2.5 2.5L16 9"/>
+            </svg>
+
+        </div>
+
+        <div class="modal-title">
+            PROCESSO CONCLUÍDO
+        </div>
+
+        <div id="successMessage" class="modal-subtitle">
+            Arquivos processados com sucesso.
+        </div>
+
+        <button
+            class="close-button"
+            type="button"
+            onclick="closeSuccess()"
+        >
+            ABRIR JOGO SELECIONADO
+        </button>
+
+    </div>
+
+</div>
+
+<!-- EXPIRED MODAL -->
+
+<div id="expiredModal" class="modal">
+
+    <div class="modal-box expired-box">
+
+        <div class="expired-icon">
+
+            <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M12 7v5"/>
+                <path d="M12 16h.01"/>
+            </svg>
+
+        </div>
+
+        <div class="modal-title">
+            SUA KEY EXPIROU
+        </div>
+
+        <div class="modal-subtitle">
+            O período gratuito de 24 horas terminou.
+            Para continuar utilizando o acesso,
+            adquira o AUXÍLIO VIP no nosso Discord.
+        </div>
+
+        <a
+            class="discord-button"
+            href="https://discord.gg/n2GPhRRzd"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            ADQUIRIR AUXÍLIO VIP
+        </a>
+
+        <button
+            class="close-button"
+            type="button"
+            onclick="closeExpired()"
+        >
+            FECHAR
+        </button>
+
+    </div>
+
+</div>
 
 <script>
 
-/* LOGIN */
+const FREE_KEY = "BRN-FREE";
+
+const FREE_DURATION = 24 * 60 * 60 * 1000;
+
+const FREE_STORAGE = "brando_free_key_start";
+
+let timerInterval = null;
+
+
+/* =========================
+   COLAR KEY
+========================= */
+
+async function pasteKey() {
+
+    const input = document.getElementById("keyInput");
+
+    const error = document.getElementById("loginError");
+
+    try {
+
+        if (
+            navigator.clipboard &&
+            navigator.clipboard.readText
+        ) {
+
+            const text =
+                await navigator.clipboard.readText();
+
+            input.value = text.trim();
+
+            error.textContent = "";
+
+            input.focus();
+
+            return;
+        }
+
+        error.textContent =
+            "A função de colar não está disponível.";
+
+    } catch (e) {
+
+        error.textContent =
+            "Não foi possível acessar a área de transferência.";
+
+    }
+
+}
+
+
+/* =========================
+   LOGIN
+========================= */
 
 function login() {
 
-    const input = document.getElementById("keyInput");
-    const error = document.getElementById("loginError");
+    const input =
+        document.getElementById("keyInput");
 
-    const key = input.value.trim();
+    const error =
+        document.getElementById("loginError");
+
+    const key =
+        input.value.trim().toUpperCase();
+
 
     if (!key) {
 
         error.textContent =
-            "Digite uma Key para continuar.";
+            "Digite ou cole uma Key.";
 
         return;
+
     }
 
-    if (!key.toUpperCase().startsWith("BRN-")) {
+
+    if (key === FREE_KEY) {
+
+        if (isFreeExpired()) {
+
+            showExpired();
+
+            return;
+
+        }
+
+        startFreeTimer();
+
+        enterMenu();
+
+        return;
+
+    }
+
+
+    if (!key.startsWith("BRN-")) {
 
         error.textContent =
             "Key não encontrada. Tente novamente.";
@@ -920,49 +1237,236 @@ function login() {
         input.focus();
 
         return;
+
     }
 
-    error.textContent = "";
+
+    error.textContent =
+        "Key não encontrada. Tente novamente.";
+
+    input.focus();
+
+}
+
+
+/* =========================
+   ENTRAR NO MENU
+========================= */
+
+function enterMenu() {
 
     document
         .getElementById("loginScreen")
         .classList.add("hidden");
 
-    setTimeout(() => {
 
-        document
-            .getElementById("menuScreen")
-            .classList.remove("hidden");
-
-    }, 300);
-}
-
-
-/* ENTER NA KEY */
-
-document
-    .getElementById("keyInput")
-    .addEventListener("keydown", function(event) {
-
-        if (event.key === "Enter") {
-            login();
-        }
-
-    });
-
-
-/* SELECIONAR AUXÍLIO */
-
-function toggleOption(element) {
-
-    element.classList.toggle("active");
+    document
+        .getElementById("menuScreen")
+        .classList.remove("hidden");
 
 }
 
 
-/* ABRIR ESCOLHA DO JOGO */
+/* =========================
+   TIMER
+========================= */
+
+function startFreeTimer() {
+
+    let start =
+        Number(
+            localStorage.getItem(
+                FREE_STORAGE
+            )
+        );
+
+
+    if (
+        !start ||
+        !Number.isFinite(start)
+    ) {
+
+        start = Date.now();
+
+        localStorage.setItem(
+            FREE_STORAGE,
+            String(start)
+        );
+
+    }
+
+
+    updateTimer();
+
+
+    clearInterval(timerInterval);
+
+
+    timerInterval =
+        setInterval(
+            updateTimer,
+            1000
+        );
+
+}
+
+
+/* =========================
+   ATUALIZAR TIMER
+========================= */
+
+function updateTimer() {
+
+    const timer =
+        document.getElementById("timer");
+
+
+    if (!timer) return;
+
+
+    const start =
+        Number(
+            localStorage.getItem(
+                FREE_STORAGE
+            )
+        );
+
+
+    if (!start) return;
+
+
+    const remaining =
+        FREE_DURATION -
+        (Date.now() - start);
+
+
+    if (remaining <= 0) {
+
+        clearInterval(timerInterval);
+
+        timer.textContent =
+            "00:00:00";
+
+        lockFreeAccess();
+
+        return;
+
+    }
+
+
+    const totalSeconds =
+        Math.floor(
+            remaining / 1000
+        );
+
+
+    const hours =
+        Math.floor(
+            totalSeconds / 3600
+        );
+
+
+    const minutes =
+        Math.floor(
+            (totalSeconds % 3600) / 60
+        );
+
+
+    const seconds =
+        totalSeconds % 60;
+
+
+    timer.textContent =
+        String(hours).padStart(2, "0") +
+        ":" +
+        String(minutes).padStart(2, "0") +
+        ":" +
+        String(seconds).padStart(2, "0");
+
+}
+
+
+/* =========================
+   VERIFICAR EXPIRAÇÃO
+========================= */
+
+function isFreeExpired() {
+
+    const start =
+        Number(
+            localStorage.getItem(
+                FREE_STORAGE
+            )
+        );
+
+
+    if (!start) {
+
+        return false;
+
+    }
+
+
+    return (
+        Date.now() - start >=
+        FREE_DURATION
+    );
+
+}
+
+
+/* =========================
+   BLOQUEAR ACESSO
+========================= */
+
+function lockFreeAccess() {
+
+    document
+        .getElementById("menuScreen")
+        .classList.add("hidden");
+
+
+    showExpired();
+
+}
+
+
+/* =========================
+   MODAL EXPIRADO
+========================= */
+
+function showExpired() {
+
+    document
+        .getElementById("expiredModal")
+        .classList.add("show");
+
+}
+
+
+function closeExpired() {
+
+    document
+        .getElementById("expiredModal")
+        .classList.remove("show");
+
+}
+
+
+/* =========================
+   GAME SELECT
+========================= */
 
 function openGames() {
+
+    if (isFreeExpired()) {
+
+        lockFreeAccess();
+
+        return;
+
+    }
+
 
     document
         .getElementById("gameModal")
@@ -971,85 +1475,153 @@ function openGames() {
 }
 
 
-/* PROCESSO */
-
-function startProcess(game) {
+function closeGames() {
 
     document
         .getElementById("gameModal")
         .classList.remove("show");
 
-    const process =
-        document.getElementById("processModal");
+}
 
-    const title =
-        document.getElementById("processTitle");
 
-    const text =
-        document.getElementById("processText");
+/* =========================
+   PROCESSO
+========================= */
 
-    process.classList.add("show");
+function startProcess(game) {
 
-    title.textContent =
-        "Inicializando";
+    closeGames();
 
-    text.textContent =
+
+    const processModal =
+        document.getElementById(
+            "processModal"
+        );
+
+
+    const processTitle =
+        document.getElementById(
+            "processTitle"
+        );
+
+
+    const processMessage =
+        document.getElementById(
+            "processMessage"
+        );
+
+
+    processTitle.textContent =
+        "INJETANDO";
+
+
+    processMessage.textContent =
         "Preparando " + game + "...";
+
+
+    processModal.classList.add("show");
 
 
     setTimeout(() => {
 
-        title.textContent =
-            "Processando";
-
-        text.textContent =
-            "Verificando módulos selecionados...";
+        processMessage.textContent =
+            "Verificando configurações...";
 
     }, 1100);
 
 
     setTimeout(() => {
 
-        title.textContent =
-            "Processando";
-
-        text.textContent =
-            "Preparando os componentes...";
+        processMessage.textContent =
+            "Aplicando configurações...";
 
     }, 2200);
 
 
     setTimeout(() => {
 
-        title.textContent =
-            "Finalizando";
-
-        text.textContent =
-            "Concluindo operação...";
+        processMessage.textContent =
+            "Finalizando processo...";
 
     }, 3300);
 
 
     setTimeout(() => {
 
-        process.classList.remove("show");
+        processModal.classList.remove("show");
+
 
         document
-            .getElementById("successModal")
+            .getElementById(
+                "successMessage"
+            )
+            .textContent =
+            game +
+            " selecionado. Processo concluído.";
+
+
+        document
+            .getElementById(
+                "successModal"
+            )
             .classList.add("show");
+
 
     }, 4400);
 
 }
 
 
-/* FECHAR SUCESSO */
+/* =========================
+   SUCCESS
+========================= */
 
 function closeSuccess() {
 
     document
-        .getElementById("successModal")
+        .getElementById(
+            "successModal"
+        )
         .classList.remove("show");
+
+}
+
+
+/* =========================
+   ENTER NO INPUT
+========================= */
+
+document
+    .getElementById("keyInput")
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                login();
+
+            }
+
+        }
+    );
+
+
+/* =========================
+   CONTINUAR TIMER
+   APÓS RECARREGAR
+========================= */
+
+if (
+    localStorage.getItem(
+        FREE_STORAGE
+    ) &&
+    !isFreeExpired()
+) {
+
+    startFreeTimer();
 
 }
 
